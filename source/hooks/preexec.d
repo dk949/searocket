@@ -9,10 +9,8 @@ import std.stdio;
 import std.datetime;
 
 public:
-int preExec(Mode mode) {
-    assert(mode != Mode.Rprompt);
+int preExec() {
     store[Prop.Exec] = 1;
     store[Prop.StartTime] = Clock.currStdTime;
-
     return 0;
 }

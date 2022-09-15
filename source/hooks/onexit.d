@@ -6,8 +6,7 @@ import storage;
 import std.file;
 
 public:
-int onExit(Mode mode) {
-    assert(mode == Mode.Prompt);
+int onExit() {
     remove(store.name);
     return 0;
 }

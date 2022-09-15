@@ -17,9 +17,9 @@ int program(string[] args) {
         case Hook.PreCommand:
             return preCommand(args.mode);
         case Hook.PreExec:
-            return preExec(args.mode);
+            return preExec();
         case Hook.OnExit:
-            return onExit(args.mode);
+            return onExit();
         default:
             dbgthrow!Exception("Unknown Hook enum member");
     }
