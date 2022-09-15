@@ -1,8 +1,8 @@
-module hooks.precommand;
+module precommand;
 
 import common;
-import hooks.mainprompt;
-import hooks.checkenv;
+import mainprompt;
+import checkenv;
 import storage;
 
 import std.stdio;

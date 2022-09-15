@@ -1,4 +1,4 @@
-module hooks.git;
+module git;
 import std.bitmanip;
 import std.algorithm;
 import std.process;

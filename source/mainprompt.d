@@ -1,7 +1,7 @@
-module hooks.mainprompt;
+module mainprompt;
 
 import common;
-import hooks.git;
+import git;
 import storage;
 
 import core.time;
