@@ -1,7 +1,7 @@
 import common;
 import args;
 
-import hooks;
+import hooks.precommand;
 import storage;
 
 import std.algorithm;
