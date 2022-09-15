@@ -16,21 +16,12 @@ import std.range;
 import std.stdio;
 import std.traits;
 
-private void append(T, Args...)(ref T a, auto ref Args args)
-if (isInstanceOf!(Appender, T)) {
-    foreach (arg; args) {
-        a.put(arg);
-    }
-}
-
 enum Mode {
     Prompt = "prompt",
     Rprompt = "rprompt",
 }
 
 enum Hook {
-    OnDirChange = "onDirChange",
-    OnPeriodic = "onPeriodic",
     PreCommand = "preCommand",
     PreExec = "preExec",
     OnExit = "onExit",
