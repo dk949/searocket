@@ -1,0 +1,20 @@
+{
+  "authors": [
+    "dk994"
+  ],
+  "copyright": "Copyright © 2022, dk994",
+  "description": "A prompt for zsh",
+  "license": "MIT",
+  "name": "searocket",
+  "versions": [
+    "git",
+    "D",
+    "python",
+    "nodejs",
+    "nodejsglobalversion",
+    "battery",
+    "haskell",
+    "rust",
+    "zig"
+  ]
+}

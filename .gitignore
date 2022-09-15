@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/searocket
+searocket.so
+searocket.dylib
+searocket.dll
+searocket.a
+searocket.lib
+searocket-test-*
+*.exe
+*.o
+*.obj
+*.lst
