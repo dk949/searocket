@@ -1,7 +1,7 @@
 module hooks.checkenv;
 
 import common;
-import hooks.common;
+import hooks.mainprompt;
 
 import storage;
 

@@ -1,6 +1,6 @@
 module common;
 
-public import hooks.common: Hook, Mode;
+public import hooks.mainprompt: Hook, Mode;
 
 import std.process;
 import std.functional;

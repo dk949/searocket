@@ -1,7 +1,7 @@
 module hooks.precommand;
 
 import common;
-import hooks.common;
+import hooks.mainprompt;
 import hooks.checkenv;
 import storage;
 

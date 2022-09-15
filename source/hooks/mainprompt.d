@@ -1,4 +1,4 @@
-module hooks.common;
+module hooks.mainprompt;
 
 import common;
 import hooks.git;
