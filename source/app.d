@@ -18,8 +18,6 @@ int program(string[] args) {
             return preCommand(args.mode);
         case Hook.OnDirChange:
             return onDirChange(args.mode);
-        case Hook.OnPeriodic:
-            return onPeriodic(args.mode);
         case Hook.PreExec:
             return preExec(args.mode);
         case Hook.OnExit:
