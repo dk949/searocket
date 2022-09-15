@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+
+envtaredown(){
+    if [ -n "$SEAROCKET_ENV_SETUP_OLD_PATH" ];then
+        PATH="$SEAROCKET_ENV_SETUP_OLD_PATH"
+        unset SEAROCKET_ENV_SETUP_OLD_PATH
+    fi
+    autoload -Uz add-zsh-hook
+
+    add-zsh-hook -d chpwd ___searocket_onDirChange
+    add-zsh-hook -d periodic ___searocket_onPeriodic
+    add-zsh-hook -d precmd ___searocket_preCommand
+    add-zsh-hook -d preexec ___searocket_preExec
+    add-zsh-hook -d zshexit ___searocket_onExit
+
+    unset SEAROCKET_VERSION
+    unset ___searocket_onDirChange
+    unset ___searocket_onPeriodic
+    unset ___searocket_preCommand
+    unset ___searocket_preExec
+    unset ___searocket_onExit
+    unset ___spacerocket_setup
+    unset -f envtaredown
+}
+
+if ! which searocket >/dev/null; then
+    export SEAROCKET_ENV_SETUP_OLD_PATH="$PATH"
+    export PATH="$PWD:$PATH"
+fi
+
+. ./zsh/searocket.zsh
+
