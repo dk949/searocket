@@ -1,7 +1,5 @@
 module common;
 
-public import mainprompt: Hook, Mode;
-
 import std.process;
 import std.functional;
 import std.conv;

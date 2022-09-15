@@ -1,7 +1,6 @@
-module checkenv;
+module prompt.checkenv;
 
 import common;
-import mainprompt;
 
 import storage;
 

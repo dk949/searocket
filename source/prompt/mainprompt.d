@@ -1,7 +1,8 @@
-module mainprompt;
+module prompt.mainprompt;
+
+import prompt.git;
 
 import common;
-import git;
 import storage;
 
 import core.time;

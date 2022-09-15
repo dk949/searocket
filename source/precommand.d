@@ -1,8 +1,7 @@
 module precommand;
 
 import common;
-import mainprompt;
-import checkenv;
+import prompt;
 import storage;
 
 import std.stdio;

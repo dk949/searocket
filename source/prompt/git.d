@@ -1,4 +1,4 @@
-module git;
+module prompt.git;
 import std.bitmanip;
 import std.algorithm;
 import std.process;

@@ -3,6 +3,7 @@ import args;
 
 import precommand;
 import storage;
+import prompt;
 
 import std.algorithm;
 import std.conv;

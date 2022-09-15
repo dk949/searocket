@@ -4,6 +4,7 @@ import common;
 import std.algorithm;
 import std.range;
 import std.traits;
+import prompt;
 
 Hook cmd(string[] args) {
     debug {
