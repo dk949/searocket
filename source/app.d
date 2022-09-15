@@ -16,8 +16,6 @@ int program(string[] args) {
     switch (cmd(args)) {
         case Hook.PreCommand:
             return preCommand(args.mode);
-        case Hook.OnDirChange:
-            return onDirChange(args.mode);
         case Hook.PreExec:
             return preExec(args.mode);
         case Hook.OnExit:

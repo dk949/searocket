@@ -4,11 +4,6 @@
 # TODO: Generate this
 export SEAROCKET_VERSION='0.1.0'
 
-
-___searocket_onDirChange (){
-    searocket onDirChange prompt
-}
-
 ___searocket_preCommand (){
     PROMPT=$(searocket preCommand prompt)
     RPROMPT=$(searocket preCommand rprompt)
@@ -26,7 +21,6 @@ ___searocket_onExit (){
 ___spacerocket_setup() {
     autoload -Uz add-zsh-hook
 
-    add-zsh-hook chpwd ___searocket_onDirChange
     add-zsh-hook precmd ___searocket_preCommand
     add-zsh-hook preexec ___searocket_preExec
     add-zsh-hook zshexit ___searocket_onExit
