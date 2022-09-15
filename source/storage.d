@@ -35,6 +35,10 @@ class Storage {
         return m_handle.name;
     }
 
+    void close() {
+        m_handle.close;
+    }
+
     this(File handle) {
         m_handle = handle;
         for (size_t i = 0; i <= Prop.max; i++) {
@@ -45,6 +49,8 @@ class Storage {
     }
 
     string opIndexAssign(T)(auto ref T val, Prop prop) {
+        debug if (!m_handle.isOpen)
+            dbgthrow!Exception("accessing storage after it was closed");
         import std.conv;
 
         data[prop] = val.text;
@@ -52,6 +58,8 @@ class Storage {
     }
 
     string opIndex(Prop prop) const {
+        debug if (!m_handle.isOpen)
+            dbgthrow!Exception("accessing storage after it was closed");
         return data[prop];
     }
 
@@ -78,6 +86,7 @@ class Storage {
     private static void makeFile(string f) {
         auto file = File(f, "w");
         static foreach (prop; only(EnumMembers!Prop)) {
+            // using a final switch to make ure if a field is added to Prop, it gets populated here
             final switch (prop) {
                 case Prop.StartTime:
                 case Prop.Exec:
@@ -100,6 +109,41 @@ private int parentProcess() {
         import core.sys.posix.unistd;
 
         return getppid();
+    }
+    // WARNING: UNTESTED CODE AHEAD
+    // basically I don't have a windows computer, but insternet says this should be about right(?)
+    // https://gist.github.com/mattn/253013/d47b90159cf8ffa4d92448614b748aa1d235ebe4
+    version (Windows) {
+        import core.sys.windows.windows;
+        import core.sys.windows.tlhelp32;
+        import core.stdc.string;
+
+        PROCESSENTRY32 pe32;
+        DWORD ppid = 0;
+        const DWORD pid = GetCurrentProcessId();
+        HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+
+        if (hSnapshot == INVALID_HANDLE_VALUE)
+            goto cleanup;
+
+        memset(&pe32, 0, pe32.sizeof);
+        pe32.dwSize = pe32.sizeof;
+        if (hSnapshot.Process32First(&pe32))
+            goto cleanup;
+
+        do
+            if (pe32.th32ParentProcessID == pid) {
+                ppid = pe32.th32ParentProcessID;
+                break;
+            }
+        while (hSnapshot.Process32Next(&pe32));
+
+    cleanup:
+        if (hSnapshot != INVALID_HANDLE_VALUE)
+            hSnapshot.CloseHandle();
+
+        return ppid;
+
     }
 
 }
