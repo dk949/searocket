@@ -20,8 +20,8 @@ int program(string[] args) {
         case Hook.PreCommand:
             return preCommand(args.mode);
         case Hook.PreExec:
-            store[Prop.Exec] = 1;
-            store[Prop.StartTime] = Clock.currStdTime;
+            store[Prop.Exec] = true.storeAs!bool;
+            store[Prop.StartTime] = Clock.currStdTime.storeAs!string;
             return 0;
         case Hook.OnExit:
             remove(store.name);
