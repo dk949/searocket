@@ -1,9 +1,9 @@
-PREFIX ?= $(HOME)/.local
+PREFIX ?= /usr
 ZSH_FILE_LOCATION ?= $(PREFIX)/share/searocket
 
 all: searocket
 
-searocket: Makefile $(wildcard source/*.d)
+searocket: Makefile $(wildcard source/**/*.d)
 	dub build -b release
 
 install: searocket
