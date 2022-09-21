@@ -13,12 +13,25 @@ import std.conv;
 private enum FILE_NAME = "searocket.data";
 
 enum Prop {
-    StartTime,
+
     Exec,
-    InGitRepo,
+    StartTime,
+
+    InBunProject,
     InDProject,
-    InPyEnv,
+    InDockerProject,
+    InElixirProject,
+    InElmProject,
+    InGitRepo,
+    InGoProject,
+    InHaskellProject,
+    InJavaProject,
+    InJuliaProject,
     InNodeProject,
+    InPhpProject,
+    InPyEnv,
+    InRubyProject,
+    InRustProject,
 }
 
 Storage store;
@@ -48,12 +61,11 @@ class Storage {
         }
     }
 
-    string opIndexAssign(T)(auto ref T val, Prop prop) {
+    string opIndexAssign(string val, Prop prop) {
         debug if (!m_handle.isOpen)
             dbgthrow!Exception("accessing storage after it was closed");
-        import std.conv;
 
-        data[prop] = val.text;
+        data[prop] = val;
         return data[prop];
     }
 
@@ -91,6 +103,17 @@ class Storage {
                 case Prop.StartTime:
                 case Prop.Exec:
                 case Prop.InGitRepo:
+                case Prop.InBunProject:
+                case Prop.InRubyProject:
+                case Prop.InDockerProject:
+                case Prop.InElixirProject:
+                case Prop.InElmProject:
+                case Prop.InGoProject:
+                case Prop.InHaskellProject:
+                case Prop.InJavaProject:
+                case Prop.InJuliaProject:
+                case Prop.InPhpProject:
+                case Prop.InRustProject:
                     file.writeln(0);
                     break;
                 case Prop.InDProject:
@@ -146,4 +169,20 @@ private int parentProcess() {
 
     }
 
+}
+
+string storeAs(Ret : string, Arg)(auto ref const Arg thing) {
+    import std.conv;
+
+    return thing.text;
+}
+
+string storeAs(Ret : bool, Arg)(auto ref const Arg thing) {
+    import std.conv;
+
+    return text(cast(int)(!!thing));
+}
+
+T storeAs(T, Arg)(auto ref const Arg) {
+    static assert(false, "Can only stire as bool or string");
 }

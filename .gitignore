@@ -13,3 +13,4 @@ searocket-test-*
 *.o
 *.obj
 *.lst
+source/prompt/integrations/package.d

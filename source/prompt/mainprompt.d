@@ -1,6 +1,8 @@
 module prompt.mainprompt;
 
-import prompt.git;
+import prompt.integrations;
+import prompt.integrations.git;
+import prompt.colors;
 
 import common;
 import storage;
@@ -28,30 +30,30 @@ enum Hook {
     OnExit = "onExit",
 }
 
-enum {
-    Black = "%F{black}",
-    Red = "%F{red}",
-    Green = "%F{green}",
-    Yellow = "%F{yellow}",
-    Blue = "%F{blue}",
-    Magenta = "%F{magenta}",
-    Cyan = "%F{cyan}",
-    White = "%F{white}",
-    Default = "%F{default}",
-}
-
 string mainPrompt() {
     auto a = appender!string;
     buildEnv(a);
-    a.append(Yellow, "%n ", Cyan, "%~%(1j. ", Blue, "✦.)");
 
+    // User name
+    a.append("%(!.", Red, ".", Yellow, ")%n ");
+
+    // Directory name
+    a.append(Cyan, "%4~");
+
+    // background process running
+    a.append("%(1j. ", Blue, "✦.)");
+
+    // Git
     version (git)
-        buildGit(a);
+        buildGit!(null)(a);
 
+    // Last command succeeded?
     if (store[Prop.Exec].to!int)
         a.append("%(0?.", Green, ".", Red, " %?)");
     else
         a.append(Green);
+
+    // prompt charcter
     a.append(" ❯ ", Default);
 
     return a.data;
@@ -59,13 +61,12 @@ string mainPrompt() {
 
 string mainRprompt() {
     auto oldTime = {
-        const o = store[Prop.StartTime];
-        if (o !is null)
+        if (const o = store[Prop.StartTime])
             return dur!"hnsecs"(o.to!long);
         else
             return Duration.zero;
     }();
-    long newTime = std.datetime.Clock.currStdTime;
+    long newTime = Clock.currStdTime;
     auto took = dur!"hnsecs"(newTime) - oldTime;
     if (took > dur!"seconds"(1))
         return text(Green, "❮", Default, " took: ", Yellow, took.prettyPrint, Default);
@@ -129,106 +130,5 @@ private string prettyPrint(Duration time) {
         return (msecs + (cast(float) usecs) / 1000).threeDP.text ~ "ms";
     } else {
         return time.total!"usecs".text ~ "μs";
-    }
-}
-
-private void buildEnv(ref Appender!string a) {
-    bool inEnv = false;
-    int envcount = 0;
-    char end = ' ';
-    void start() {
-        envcount++;
-        if (envcount >= 3)
-            end = '\n';
-        if (!inEnv) {
-            a.append(Blue, '[');
-            inEnv = true;
-        } else {
-            a.put(", ");
-        }
-    }
-
-    scope (exit)
-        if (inEnv)
-            a.append(']', end);
-
-    version (D) {
-        const dversion = store[Prop.InDProject];
-        if (dversion != "") {
-            start;
-            if (dversion == "D")
-                a.put('D');
-            else
-                a.append("D@", dversion);
-        }
-    }
-    version (python) {
-        const venv = store[Prop.InPyEnv];
-        if (venv != "") {
-            start;
-            a.append("🐍@", venv);
-        }
-    }
-    version (nodejs) {
-        const node = store[Prop.InNodeProject];
-        if (node != "") {
-            start;
-            if (node == "node")
-                a.put("⬢ ");
-            else
-                a.append("⬢ @", node);
-        }
-    }
-    version (battery) {
-    }
-    version (haskell) {
-    }
-    version (rust) {
-    }
-    version (zig) {
-    }
-}
-
-version (git) private void buildGit(ref Appender!string a) {
-    if (!(store[Prop.InGitRepo].to!int))
-        return;
-    const branch = gitBranch;
-    if (branch)
-        a.append(Magenta, "  ", branch);
-    const status = getGitStatus();
-    if (status == status.init)
-        return;
-
-    a.append(Red, " [");
-    scope (exit)
-        a.put(']');
-
-    if (status.added)
-        a.put('+');
-    if (status.modified)
-        a.put('!');
-    if (status.renamed)
-        a.put('"');
-    if (status.deleted)
-        a.put('X');
-    if (status.untracked)
-        a.put('?');
-    if (status.unmerged)
-        a.put('=');
-    if (status.stashed)
-        a.put('$');
-
-    switch (status.remoteState) {
-        case GitStatus.RemoteState.Ahead:
-            a.put('⇡');
-            break;
-        case GitStatus.RemoteState.Behind:
-            a.put('⇣');
-            break;
-        case GitStatus.RemoteState.Diverged:
-            a.put('⇕');
-            break;
-        default:
-            break;
     }
 }
