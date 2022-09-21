@@ -6,15 +6,34 @@
   "description": "A prompt for zsh",
   "license": "MIT",
   "name": "searocket",
+  "preBuildCommands": [
+    "rdmd scripts/makeintegrations.d source/prompt/integrations/ source/prompt/integrations/package.d"
+  ],
   "versions": [
-    "git",
-    "D",
-    "python",
-    "nodejs",
-    "nodejsglobalversion",
+    "user",
+    "dir",
+    "exec",
+    "exitcode",
+    "jobs",
+
     "battery",
+    "bun",
+    "d",
+    "elixir",
+    "elm",
+    "git",
+    "go",
     "haskell",
+    "nodejs",
+    "php",
+    "java",
+    "julia",
+    "docker",
+    "python",
+    "ruby",
     "rust",
+    "swift",
+    "xcode",
     "zig"
   ]
 }
