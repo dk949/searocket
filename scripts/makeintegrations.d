@@ -96,7 +96,9 @@ void buildEnv(ref Appender!string a) {
         }
     }
     scope(exit)
-        a.append(']', end);
+        if(inEnv)
+            a.append(']', end);
+
 `);
 
     foreach (ent; dirEntries(dir, SpanMode.shallow)) {
