@@ -30,8 +30,6 @@ echo ". /path/to/searocket.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc"
 
 ## Config
 
-This part will be improved in the next refactor
-
 The basic idea is that all configuration is done at compile time. This would
 require the user to have the [D toolchain](https://dlang.org/download.html)
 setup.
@@ -41,52 +39,48 @@ Integrations can be enabled by adding to the `versions` array in `dub.json`.
 Enabling more integrations will cause the prompt to be slower, but this is not
 very perceptible.
 
-It is currently not possible to control colors, symbols or order (former two are
-planned for the future). NOTE: this means that (for now) if your terminal does
-not support emoji the symbols for Python (🐍) and Node (⬢ ) will not show up
-correctly (symbol for Node might not work even if you have emoji support).
-
 ### supported `versions` values
 
-* git
-* D
-* python
-* nodejs
-* nodejsglobalversion
-  * if `.nvmrc` is not present, query the `node` executable for node version.
-* battery
-* haskell
-* rust
-* zig
+* Utility
+  * `dir`
+    * Print current directory
+  * `exitcode`
+    * Print what last command exited with (if it's not 0)
+  * `user`
+    * Print username
+  * `jobs`
+    * Is there a background job running
+  * `took`
+    * How long did the previous command take
+  * `timing`
+    * Total execution time for the prompt.
+    * For debug only
+* Integrations
+  * `bun`
+  * `d`
+  * `elm`
+  * `git`
+  * `go`
+  * `nodejs`
+  * `python`
+  * `zig`
+* Currently unsupported:
+  * `battery`
+  * `docker`
+  * `elixir`
+  * `haskell`
+  * `java`
+  * `julia`
+  * `php`
+  * `ruby`
+  * `rust`
+  * `swift`
+  * `xcode`
 
-## TODO
+### `source/config.d`
 
-### Integrations (roughly in order of importance)
+See [configOpts.md](configOpts.md) for the full list.
 
-* [x] git
-* [x] D
-* [x] python
-* [x] nodejs (with venison number!!)
-* [ ] laptop battery
-* [ ] haskell
-* [ ] rust
-* [ ] zig
-
-### Configuration
-
-* [x] selectively enable integrations
-* [ ] Configuring colors of different parts of the prompt
-* [ ] Configuring symbols used for various
-* [ ] Set how long a program needs to run before the "took: ###" rprompt is
-  shown.
-
-## Development
-
-To test the prompt during development, start a zsh session with the default
-prompt, then source the `envsetup` file. If an error shows up, run any command
-(I tend to use `clear`) and it should disappear.
-
-At the end, either run the `envtaredown` function, or just exit zsh.
 
 ## License
 
