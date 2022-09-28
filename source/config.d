@@ -9,6 +9,7 @@
 module config;
 public import configutils;
 import prompt.colors;
+import std.datetime;
 
 // To enable a section of this config, add the `version` to the `versions` list in `dub.json`
 
@@ -50,6 +51,7 @@ version (took) enum {
     TOOK_CHAR_COLOR = Green,
     TOOK_TEXT_COLOR = Default,
     TOOK_TIME_COLOR = Yellow,
+    TOOK_THRESHOLD = dur!"seconds"(2),
 }
 
 version (exitcode) enum {

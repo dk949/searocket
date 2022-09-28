@@ -77,7 +77,7 @@ version (took) string mainRprompt() {
     }();
     long newTime = Clock.currStdTime;
     auto took = dur!"hnsecs"(newTime) - oldTime;
-    if (took > dur!"seconds"(1))
+    if (took > TOOK_THRESHOLD)
         return text(
             TOOK_CHAR_COLOR,
             TOOK_CHAR,
