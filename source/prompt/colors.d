@@ -38,3 +38,7 @@ enum {
     StandoutCyan = "%S%F{cyan}%s",
     StandoutWhite = "%S%F{white}%s",
 }
+
+string colorify(string c) {
+    return "%F{" ~ c ~ "}";
+}
