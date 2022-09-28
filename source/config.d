@@ -80,6 +80,20 @@ version (elm) enum {
     ELM_COLOR = Cyan,
     ELM_DETECT_VERSION = ElmDetectVersion.IfNoElmJson,
 }
+version (git) enum {
+    GIT_CHAR = "  ",
+    GIT_COLOR = Magenta,
+    GIT_STATUS_COLOR = Red,
+    GIT_UNTRACKED_CHAR = "?",
+    GIT_ADDED_CHAR = "+",
+    GIT_MODIFIED_CHAR = "!",
+    GIT_RENAMED_CHAR = "»",
+    GIT_DELETED_CHAR = "✘",
+    GIT_STASHED_CHAR = "$",
+    GIT_UNMERGED_CHAR = "=",
+    GIT_AHEAD_CHAR = "⇡",
+    GIT_BEHIND_CHAR = "⇣",
+    GIT_DIVERGED_CHAR = "⇕",
 version (nodejs) enum {
     NODE_SYMBOL = "⬢ ",
     NODE_COLOR = Green,

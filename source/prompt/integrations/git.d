@@ -1,4 +1,5 @@
 module prompt.integrations.git;
+import config;
 version (git) {
 
     import common;
@@ -144,39 +145,39 @@ version (git) {
         const branch = gitBranch;
 
         if (branch)
-            a.append(Magenta, "  ", branch);
+            a.append(GIT_COLOR, GIT_CHAR, branch);
         const status = getGitStatus();
         if (status == status.init)
             return;
 
-        a.append(Red, " [");
+        a.append(GIT_STATUS_COLOR, " [");
         scope (exit)
             a.put(']');
 
         if (status.added)
-            a.put('+');
+            a.put(GIT_ADDED_CHAR);
         if (status.modified)
-            a.put('!');
+            a.put(GIT_MODIFIED_CHAR);
         if (status.renamed)
-            a.put('"');
+            a.put(GIT_RENAMED_CHAR);
         if (status.deleted)
-            a.put('X');
+            a.put(GIT_DELETED_CHAR);
         if (status.untracked)
-            a.put('?');
+            a.put(GIT_UNTRACKED_CHAR);
         if (status.unmerged)
-            a.put('=');
+            a.put(GIT_UNMERGED_CHAR);
         if (status.stashed)
-            a.put('$');
+            a.put(GIT_STASHED_CHAR);
 
         switch (status.remoteState) {
             case GitStatus.RemoteState.Ahead:
-                a.put('⇡');
+                a.put(GIT_AHEAD_CHAR);
                 break;
             case GitStatus.RemoteState.Behind:
-                a.put('⇣');
+                a.put(GIT_BEHIND_CHAR);
                 break;
             case GitStatus.RemoteState.Diverged:
-                a.put('⇕');
+                a.put(GIT_DIVERGED_CHAR);
                 break;
             default:
                 break;
