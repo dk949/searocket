@@ -21,4 +21,17 @@ string findFile(string name) {
     return findFile!(d => d.name.baseName == name ? d.name : null);
 }
 
+string versionString(string exe, string param = "--version")() {
+    import std.process;
+    import std.string;
+    import common;
+    try {
+        const e = execute([exe, param]);
+        if (e.status != 0)
+            dbgthrow!Exception("could not get " ~ exe ~ " version");
+        return e.output.stripRight;
+    } catch (ProcessException e)
+        return null;
+}
+
 T declval(T)();
