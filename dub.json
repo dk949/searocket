@@ -12,8 +12,8 @@
   "versions": [
     "user",
     "dir",
-    "exec",
     "exitcode",
+    "took",
     "jobs",
 
     "battery",

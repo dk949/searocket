@@ -11,16 +11,18 @@ public:
 int preCommand(Mode mode) {
     final switch (mode) {
         case Mode.Prompt:
-            if (store[Prop.Exec] && store[Prop.Exec].to!int){
+            if (store[Prop.Exec] && store[Prop.Exec].to!int) {
                 checkGit();
                 checkEnv();
             }
             writeln(mainPrompt);
             break;
         case Mode.Rprompt:
-            if (store[Prop.Exec] && store[Prop.Exec].to!int) {
-                store[Prop.Exec] = false.storeAs!bool;
-                writeln(mainRprompt);
+            version (took) {
+                if (store[Prop.Exec] && store[Prop.Exec].to!int) {
+                    store[Prop.Exec] = false.storeAs!bool;
+                    writeln(mainRprompt);
+                }
             }
             break;
     }

@@ -6,6 +6,7 @@ import prompt.colors;
 
 import common;
 import storage;
+import config;
 
 import core.time;
 import std.algorithm;
@@ -34,32 +35,40 @@ string mainPrompt() {
     auto a = appender!string;
     buildEnv(a);
 
-    // User name
-    a.append("%(!.", Red, ".", Yellow, ")%n ");
+    version (user) {
+        static if (SHOW_USER == UsrShow.Yes)
+            a.append("%(!.", ROOT_USER_COLOR, ".", USER_COLOR, ")%n ");
+        else static if (SHOW_USER == UserShow.RemoteOnly) {
+            static assert(0, "Not yet implemented");
+        }
+    }
 
-    // Directory name
-    a.append(Cyan, "%4~");
+    version (dir) {
+        static if (DIR_TRUNCATION == 0)
+            a.append(DIR_COLOR, "%~");
+        else
+            a.append(DIR_COLOR, "%", DIR_TRUNCATION.text, "~");
+    }
 
-    // background process running
-    a.append("%(1j. ", Blue, "✦.)");
+    version (jobs)
+        a.append("%(1j. ", JOBS_COLOR, JOBS_CHAR, ".)");
 
-    // Git
     version (git)
         buildGit!(null)(a);
 
-    // Last command succeeded?
-    if (store[Prop.Exec].to!int)
-        a.append("%(0?.", Green, ".", Red, " %?)");
-    else
-        a.append(Green);
+    version (exitcode) {
+        if (store[Prop.Exec].to!int)
+            a.append("%(0?.", SUCCESS_COLOR, ".", EXIT_CODE_COLOR, " %?", FAILURE_COLOR, ")");
+        else
+            a.append(SUCCESS_COLOR);
+    }
 
-    // prompt charcter
-    a.append(" ❯ ", Default);
+    a.append(PROMPT_CHAR, Default);
 
     return a.data;
 }
 
-string mainRprompt() {
+version (took) string mainRprompt() {
     auto oldTime = {
         if (const o = store[Prop.StartTime])
             return dur!"hnsecs"(o.to!long);
@@ -69,7 +78,14 @@ string mainRprompt() {
     long newTime = Clock.currStdTime;
     auto took = dur!"hnsecs"(newTime) - oldTime;
     if (took > dur!"seconds"(1))
-        return text(Green, "❮", Default, " took: ", Yellow, took.prettyPrint, Default);
+        return text(
+            TOOK_CHAR_COLOR,
+            TOOK_CHAR,
+            TOOK_TEXT_COLOR,
+            " took: ",
+            TOOK_TIME_COLOR,
+            took.prettyPrint,
+            Default);
     return "";
 }
 

@@ -69,6 +69,7 @@ See scripts/makeintegrations.d
 module prompt.integrations;
 
 import common;
+import config;
 import prompt.colors;
 
 import std.array;
@@ -89,15 +90,15 @@ void buildEnv(ref Appender!string a) {
         if (envcount >= 3)
             end = '\n';
         if (!inEnv) {
-            a.append(Blue, '[');
+            a.append(INTEGRATION_COLOR, INTEGRATION_START_CHAR);
             inEnv = true;
         } else {
-            a.put(", ");
+            a.append(INTEGRATION_COLOR, ", ");
         }
     }
     scope(exit)
         if(inEnv)
-            a.append(']', end);
+            a.append(INTEGRATION_COLOR, INTEGRATION_END_CHAR, end);
 
 `);
 
