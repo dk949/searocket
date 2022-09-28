@@ -103,11 +103,9 @@ class Storage {
                 case Prop.StartTime:
                 case Prop.Exec:
                 case Prop.InGitRepo:
-                case Prop.InBunProject:
                 case Prop.InRubyProject:
                 case Prop.InDockerProject:
                 case Prop.InElixirProject:
-                case Prop.InElmProject:
                 case Prop.InGoProject:
                 case Prop.InHaskellProject:
                 case Prop.InJavaProject:
@@ -116,9 +114,11 @@ class Storage {
                 case Prop.InRustProject:
                     file.writeln(0);
                     break;
+                case Prop.InBunProject:
                 case Prop.InDProject:
-                case Prop.InPyEnv:
+                case Prop.InElmProject:
                 case Prop.InNodeProject:
+                case Prop.InPyEnv:
                     file.writeln("");
                     break;
             }
