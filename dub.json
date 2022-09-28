@@ -7,7 +7,7 @@
   "license": "MIT",
   "name": "searocket",
   "preBuildCommands": [
-    "rdmd scripts/makeintegrations.d source/prompt/integrations/ source/prompt/integrations/package.d"
+    "dub scripts/makeintegrations.d source/prompt/integrations/ source/prompt/integrations/package.d"
   ],
   "versions": [
     "user",

@@ -1,4 +1,9 @@
-#!/usr/bin/env rdmd
+#!/usr/bin/env dub
+/+dub.json:
+{
+    "name": "makeintegrations"
+}
++/
 
 import std.file;
 import std.path;
