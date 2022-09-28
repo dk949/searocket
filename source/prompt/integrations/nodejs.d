@@ -43,10 +43,11 @@ version (nodejs) {
         const node = store[Prop.InNodeProject];
         if (node != "") {
             start;
+            a.put(NODE_COLOR);
             if (node == "node")
-                a.put("⬢ ");
+                a.put(NODE_SYMBOL);
             else
-                a.append("⬢ @", node);
+                a.append(NODE_SYMBOL, "@", node);
         }
     }
 }

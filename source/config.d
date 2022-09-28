@@ -80,6 +80,11 @@ version (elm) enum {
     ELM_COLOR = Cyan,
     ELM_DETECT_VERSION = ElmDetectVersion.IfNoElmJson,
 }
+version (nodejs) enum {
+    NODE_SYMBOL = "⬢ ",
+    NODE_COLOR = Green,
+    NODE_DETECT_VERSION = NodeDetectVersion.IfNoNvmrc,
+}
 version (python) enum {
     PYTHON_SYMBOL = "🐍",
     PYTHON_COLOR = Yellow,
