@@ -7,6 +7,7 @@
 */
 
 module config;
+public import configutils;
 import prompt.colors;
 
 // To enable a section of this config, add the `version` to the `versions` list in `dub.json`
@@ -54,4 +55,22 @@ version(took) enum{
 
 version (exitcode) enum {
     EXIT_CODE_COLOR = BoldRed,
+}
+
+// Integraions
+
+enum {
+    INTEGRATION_COLOR = Blue,
+    INTEGRATION_START_CHAR = '[',
+    INTEGRATION_END_CHAR = ']',
+    /* how many integrations are shown in a line before prompt is split in to 2
+       lines. 0 for no limit. Note: Propmt may become dificult to use if too
+       many integrations are present on a single line. */
+    INTEGRATION_MAX_INLINE = 3,
+
+}
+version (python) enum {
+    PYTHON_SYMBOL = "🐍",
+    PYTHON_COLOR = Yellow,
+    PYTHON_DETECT_VERSION = PythonDetectVersion.IfNoVenv,
 }

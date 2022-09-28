@@ -4,6 +4,7 @@ version (python) {
     import prompt.integrations.common;
     import common;
     import storage;
+    import config;
 
     import std.algorithm;
     import std.array;
@@ -35,10 +36,11 @@ version (python) {
         const venv = store[Prop.InPyEnv];
         if (venv != "") {
             start;
+            a.put(PYTHON_COLOR);
             if (venv == "python")
-                a.append("🐍");
+                a.append(PYTHON_SYMBOL);
             else
-                a.append("🐍@", venv);
+                a.append(PYTHON_SYMBOL,"@", venv);
         }
     }
 }
