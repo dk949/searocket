@@ -24,7 +24,6 @@ enum {
     INCOMPLETE_CMD_COLOR = Yellow,
 }
 
-
 version (user) enum {
     SHOW_USER = UsrShow.Yes,
     USER_COLOR = Yellow,
@@ -46,7 +45,7 @@ version (jobs) enum {
     JOBS_COLOR = Blue,
 }
 
-version(took) enum{
+version (took) enum {
     TOOK_CHAR = "❮",
     TOOK_CHAR_COLOR = Green,
     TOOK_TEXT_COLOR = Default,
@@ -102,6 +101,12 @@ version (git) enum {
     GIT_AHEAD_CHAR = "⇡",
     GIT_BEHIND_CHAR = "⇣",
     GIT_DIVERGED_CHAR = "⇕",
+}
+version (go) enum {
+    GO_SYMBOL = "🐹",
+    GO_COLOR = Cyan,
+    GO_DETECT_VERSION = GoDetectVersion.Yes,
+}
 version (nodejs) enum {
     NODE_SYMBOL = "⬢ ",
     NODE_COLOR = Green,

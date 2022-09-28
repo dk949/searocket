@@ -106,7 +106,6 @@ class Storage {
                 case Prop.InRubyProject:
                 case Prop.InDockerProject:
                 case Prop.InElixirProject:
-                case Prop.InGoProject:
                 case Prop.InHaskellProject:
                 case Prop.InJavaProject:
                 case Prop.InJuliaProject:
@@ -114,6 +113,7 @@ class Storage {
                 case Prop.InRustProject:
                     file.writeln(0);
                     break;
+                case Prop.InGoProject:
                 case Prop.InBunProject:
                 case Prop.InDProject:
                 case Prop.InElmProject:

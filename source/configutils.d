@@ -17,6 +17,29 @@ enum DDetectVersion {
     IfNoPS1,
 }
 
+enum ElmDetectVersion {
+    No,
+    Yes,
+    IfNoElmJson,
+
+}
+enum GoDetectVersion {
+    No,
+    Yes,
+    IfNoGoMod,
+}
+
+enum UsrShow {
+    Yes,
+    RemoteOnly,
+}
+
+enum BatteryShow {
+    No,
+    Yes,
+    Low,
+}
+
 import config: D_COMPILER_ORDER;
 import std.algorithm;
 
