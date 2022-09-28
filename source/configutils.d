@@ -11,6 +11,25 @@ enum PythonDetectVersion {
     Yes,
     IfNoVenv,
 }
+
+enum RubyDetectVersion {
+    No,
+    Yes,
+    IfNoGemfile,
+}
+
+enum RustDetectVersion {
+    No,
+    Yes,
+    IfNoConfigToml,
+}
+
+enum HaskellDetectVersion {
+    No,
+    Yes,
+    IfNoStackYaml,
+}
+
 enum DDetectVersion {
     No,
     Yes,
@@ -23,6 +42,7 @@ enum ElmDetectVersion {
     IfNoElmJson,
 
 }
+
 enum GoDetectVersion {
     No,
     Yes,
@@ -44,3 +64,15 @@ import config: D_COMPILER_ORDER;
 import std.algorithm;
 
 static assert(D_COMPILER_ORDER.all!(c => c == "ldc" || c == "dmd" || c == "gdc"), "Unsupported Dlang compiler");
+
+version (battery) static assert(0, "battery not yet implemented");
+version (docker) static assert(0, "docker not yet implemented");
+version (elixir) static assert(0, "elixir not yet implemented");
+version (haskell) static assert(0, "haskell not yet implemented");
+version (java) static assert(0, "java not yet implemented");
+version (julia) static assert(0, "julia not yet implemented");
+version (php) static assert(0, "php not yet implemented");
+version (ruby) static assert(0, "ruby not yet implemented");
+version (rust) static assert(0, "rust not yet implemented");
+version (swift) static assert(0, "swift not yet implemented");
+version (xcode) static assert(0, "xcode not yet implemented");

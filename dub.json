@@ -16,24 +16,13 @@
     "took",
     "jobs",
 
-    "battery",
     "bun",
     "d",
-    "elixir",
     "elm",
     "git",
     "go",
-    "haskell",
     "nodejs",
-    "php",
-    "java",
-    "julia",
-    "docker",
     "python",
-    "ruby",
-    "rust",
-    "swift",
-    "xcode",
     "zig"
   ]
 }

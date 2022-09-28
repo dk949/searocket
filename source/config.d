@@ -69,6 +69,14 @@ enum {
 
 }
 
+// Not yet implemented
+version (battery) enum {
+    BATTERY_SHOW = BatteryShow.Low,
+    BATTERY_CHARGING_CHAR = "+",
+    BATTERY_DISCHARGING_CHAR = "-",
+    BATTERY_FULL_CHAR = "",
+    BATTERY_THRESHOLD = 20,
+}
 version (bun) enum {
     BUN_SYMBOL = "🍞",
     BUN_COLOR = "#fbf0df".colorify,
@@ -81,6 +89,17 @@ version (d) enum {
     /* If D_DETECT_VERSION == Yes or IfNoPS1, what order to try compilers in.
        First compiler that exists is used. */
     D_COMPILER_ORDER = ["ldc", "dmd", "gdc"],
+}
+// Not yet implemented
+version (docker) enum {
+    DOCKER_SYMBOL = "🐳",
+    DOCKER_COLOR = Cyan,
+}
+// Not yet implemented
+version (elixir) enum {
+    ELIXIR_SYMBOL = "💧",
+    ELIXIR_COLOR = Magenta,
+    ELIXIR_DETECT_VERSION = true,
 }
 version (elm) enum {
     ELM_SYMBOL = "🌳",
@@ -107,15 +126,63 @@ version (go) enum {
     GO_COLOR = Cyan,
     GO_DETECT_VERSION = GoDetectVersion.Yes,
 }
+// Not yet implemented
+version (haskell) enum {
+    HASKELL_SYMBOL = "λ",
+    HASKELL_COLOR = Blue,
+    HASKELL_DETECT_VERSION = HaskellDetectVersion.IfNoStackYaml,
+}
+// Not yet implemented
+version (java) enum {
+    JAVA_SYMBOL = "♨️ ",
+    JAVA_COLOR = Red,
+    JAVA_DETECT_VERSION = true,
+}
+// Not yet implemented
+version (julia) enum {
+    JULIA_SYMBOL = "ஃ",
+    JULIA_COLOR = Green,
+    JULIA_DETECT_VERSION = true,
+}
 version (nodejs) enum {
     NODE_SYMBOL = "⬢ ",
     NODE_COLOR = Green,
     NODE_DETECT_VERSION = NodeDetectVersion.IfNoNvmrc,
 }
+// Not yet implemented
+version (php) enum {
+    PHP_SYMBOL = "🐘",
+    PHP_COLOR = Blue,
+    PHP_DETECT_VERSION = true,
+}
 version (python) enum {
     PYTHON_SYMBOL = "🐍",
     PYTHON_COLOR = Yellow,
     PYTHON_DETECT_VERSION = PythonDetectVersion.IfNoVenv,
+}
+// Not yet implemented
+version (ruby) enum {
+    RUBY_SYMBOL = "💎",
+    RUBY_COLOR = Red,
+    RUBY_DETECT_VERSION = RubyDetectVersion.IfNoGemfile,
+}
+// Not yet implemented
+version (rust) enum {
+    RUST_SYMBOL = "🦀",
+    RUST_COLOR = Red,
+    RUST_DETECT_VERSION = RustDetectVersion.IfNoConfigToml,
+}
+// Not yet implemented
+version (swift) enum {
+    SWIFT_SYMBOL = "🐦",
+    SWIFT_COLOR = Yellow,
+    SWIFT_DETECT_VERSION = RubyDetectVersion.IfNoGemfile,
+}
+// Not yet implemented
+version (xcode) enum {
+    XCODE_SYMBOL = "🛠 ",
+    XCODE_COLOR = Blue,
+    XCODE_DETECT_VERSION = RubyDetectVersion.IfNoGemfile,
 }
 version (zig) enum {
     ZIG_SYMBOL = "🇿 ",
