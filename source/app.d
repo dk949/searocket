@@ -32,6 +32,16 @@ int program(string[] args) {
 }
 
 int main(string[] args) {
+    version (timing) {
+        import std.datetime.stopwatch;
+
+        auto sw = StopWatch(AutoStart.yes);
+        scope (exit) {
+            sw.stop;
+            write("Total execution time: ", sw.peek, " >");
+        }
+    }
+
     debug {
         try
             return program(args);
