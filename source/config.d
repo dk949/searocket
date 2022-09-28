@@ -75,6 +75,14 @@ version (bun) enum {
     BUN_COLOR = "#fbf0df".colorify,
     BUN_DETECT_VERSION = true,
 }
+version (d) enum {
+    D_SYMBOL = "🇩 ",
+    D_COLOR = Red,
+    D_DETECT_VERSION = DDetectVersion.IfNoPS1,
+    /* If D_DETECT_VERSION == Yes or IfNoPS1, what order to try compilers in.
+       First compiler that exists is used. */
+    D_COMPILER_ORDER = ["ldc", "dmd", "gdc"],
+}
 version (elm) enum {
     ELM_SYMBOL = "🌳",
     ELM_COLOR = Cyan,
