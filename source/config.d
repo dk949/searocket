@@ -69,6 +69,12 @@ enum {
     INTEGRATION_MAX_INLINE = 3,
 
 }
+
+version (bun) enum {
+    BUN_SYMBOL = "🍞",
+    BUN_COLOR = "#fbf0df".colorify,
+    BUN_DETECT_VERSION = true,
+}
 version (python) enum {
     PYTHON_SYMBOL = "🐍",
     PYTHON_COLOR = Yellow,
