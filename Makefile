@@ -3,8 +3,10 @@ ZSH_FILE_LOCATION ?= $(PREFIX)/share/searocket
 
 all: searocket
 
+DFLAGS := -b release
+
 searocket: Makefile $(wildcard source/**/*.d)
-	dub build -b release
+	dub build $(DFLAGS)
 
 install: searocket
 	@echo "installing executable in $(PREFIX)/bin"
