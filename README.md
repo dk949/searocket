@@ -1,5 +1,7 @@
 # searocket prompt
 
+![screenshot of using searocket](screenshot.png)
+
 [spaceship prompt](https://github.com/spaceship-prompt/spaceship-prompt) is
 pretty good... but it was getting a bit sluggish for my liking. So I made this
 slimmed down version which does all the heavy lifting in D.
