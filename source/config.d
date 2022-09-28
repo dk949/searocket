@@ -75,6 +75,11 @@ version (bun) enum {
     BUN_COLOR = "#fbf0df".colorify,
     BUN_DETECT_VERSION = true,
 }
+version (elm) enum {
+    ELM_SYMBOL = "🌳",
+    ELM_COLOR = Cyan,
+    ELM_DETECT_VERSION = ElmDetectVersion.IfNoElmJson,
+}
 version (python) enum {
     PYTHON_SYMBOL = "🐍",
     PYTHON_COLOR = Yellow,
