@@ -32,6 +32,7 @@ enum Prop {
     InPyEnv,
     InRubyProject,
     InRustProject,
+    InZigProject,
 }
 
 Storage store;
@@ -103,21 +104,22 @@ class Storage {
                 case Prop.StartTime:
                 case Prop.Exec:
                 case Prop.InGitRepo:
-                case Prop.InRubyProject:
                 case Prop.InDockerProject:
+                    file.writeln(0);
+                    break;
+                case Prop.InRubyProject:
                 case Prop.InElixirProject:
                 case Prop.InHaskellProject:
                 case Prop.InJavaProject:
                 case Prop.InJuliaProject:
                 case Prop.InPhpProject:
                 case Prop.InRustProject:
-                    file.writeln(0);
-                    break;
                 case Prop.InGoProject:
                 case Prop.InBunProject:
                 case Prop.InDProject:
                 case Prop.InElmProject:
                 case Prop.InNodeProject:
+                case Prop.InZigProject:
                 case Prop.InPyEnv:
                     file.writeln("");
                     break;

@@ -117,3 +117,8 @@ version (python) enum {
     PYTHON_COLOR = Yellow,
     PYTHON_DETECT_VERSION = PythonDetectVersion.IfNoVenv,
 }
+version (zig) enum {
+    ZIG_SYMBOL = "🇿 ",
+    ZIG_COLOR = Yellow,
+    ZIG_DETECT_VERSION = true,
+}
