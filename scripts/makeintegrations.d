@@ -55,7 +55,7 @@ int main(string[] args) {
         return 1;
     }
 
-    if (!(dest.exists || dest.isFile)) {
+    if (dest.exists && !dest.isFile) {
         stderr.writeln(dest, " exists and is not a file");
         return 1;
     }
