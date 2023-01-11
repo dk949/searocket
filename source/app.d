@@ -46,7 +46,7 @@ int main(string[] args) {
         try
             return program(args);
         catch (Exception e) {
-            writeln("ERROR: ", e.msg);
+            writeln("ERROR: ", e);
             return 2;
         }
     } else {
