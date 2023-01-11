@@ -1,4 +1,5 @@
 module configutils;
+import std.traits;
 
 enum NodeDetectVersion {
     No,
@@ -58,6 +59,19 @@ enum BatteryShow {
     No,
     Yes,
     Low,
+}
+
+
+/// Use nerd-font dev icons for languages?
+enum LanguageIcons {
+    No,
+    Emoji,
+    Yes,
+}
+
+string iconSelector(string[[EnumMembers!LanguageIcons].length] icons){
+    import config: USE_ICONS;
+    return icons[cast(size_t)USE_ICONS];
 }
 
 import config: D_COMPILER_ORDER;

@@ -23,6 +23,8 @@ enum {
     FAILURE_COLOR = BoldRed,
     // Coming soon
     INCOMPLETE_CMD_COLOR = Yellow,
+
+    USE_ICONS = LanguageIcons.Yes,
 }
 
 version (user) enum {
@@ -85,7 +87,7 @@ version (bun) enum {
     BUN_DETECT_VERSION = true,
 }
 version (d) enum {
-    D_SYMBOL = "🇩 ",
+    D_SYMBOL = iconSelector(["D", "🇩 ", " "]),
     D_COLOR = Red,
     D_DETECT_VERSION = DDetectVersion.IfNoPS1,
     /* If D_DETECT_VERSION == Yes or IfNoPS1, what order to try compilers in.
@@ -94,17 +96,17 @@ version (d) enum {
 }
 // Not yet implemented
 version (docker) enum {
-    DOCKER_SYMBOL = "🐳",
+    DOCKER_SYMBOL = iconSelector(["Dock",  "🐳", " "]),
     DOCKER_COLOR = Cyan,
 }
 // Not yet implemented
 version (elixir) enum {
-    ELIXIR_SYMBOL = "💧",
+    ELIXIR_SYMBOL =  iconSelector(["Elx", "💧", " "]),
     ELIXIR_COLOR = Magenta,
     ELIXIR_DETECT_VERSION = true,
 }
 version (elm) enum {
-    ELM_SYMBOL = "🌳",
+    ELM_SYMBOL = iconSelector(["Elm", "🌳", " "]),
     ELM_COLOR = Cyan,
     ELM_DETECT_VERSION = ElmDetectVersion.IfNoElmJson,
 }
@@ -113,81 +115,81 @@ version (git) enum {
     GIT_COLOR = Magenta,
     GIT_STATUS_COLOR = Red,
     GIT_UNTRACKED_CHAR = "?",
-    GIT_ADDED_CHAR = "+",
-    GIT_MODIFIED_CHAR = "!",
-    GIT_RENAMED_CHAR = "»",
-    GIT_DELETED_CHAR = "✘",
-    GIT_STASHED_CHAR = "$",
-    GIT_UNMERGED_CHAR = "=",
-    GIT_AHEAD_CHAR = "⇡",
-    GIT_BEHIND_CHAR = "⇣",
-    GIT_DIVERGED_CHAR = "⇕",
+    GIT_ADDED_CHAR    = iconSelector(["+" ,"+" ," "]),
+    GIT_MODIFIED_CHAR = iconSelector(["!" ,"!" ," "]),
+    GIT_RENAMED_CHAR  = iconSelector([">" ,"»" ," "]),
+    GIT_DELETED_CHAR  = iconSelector(["X" ,"✘" ," "]),
+    GIT_STASHED_CHAR  = iconSelector(["$" ,"$" ,"$"]),
+    GIT_UNMERGED_CHAR = iconSelector(["=" ,"=" ,""]),
+    GIT_AHEAD_CHAR    = iconSelector(["^" ,"⇡" ,"⇡"]),
+    GIT_BEHIND_CHAR   = iconSelector(["v" ,"⇣" ,"⇣"]),
+    GIT_DIVERGED_CHAR = iconSelector(["|" ,"⇕" ,"⇕"]),
 }
 version (go) enum {
-    GO_SYMBOL = "🐹",
+    GO_SYMBOL = iconSelector(["Go", "🐹", " "]),
     GO_COLOR = Cyan,
     GO_DETECT_VERSION = GoDetectVersion.Yes,
 }
 // Not yet implemented
 version (haskell) enum {
-    HASKELL_SYMBOL = "λ",
+    HASKELL_SYMBOL = iconSelector(["Hs", "λ", " "]),
     HASKELL_COLOR = Blue,
     HASKELL_DETECT_VERSION = HaskellDetectVersion.IfNoStackYaml,
 }
 // Not yet implemented
 version (java) enum {
-    JAVA_SYMBOL = "♨️ ",
+    JAVA_SYMBOL = iconSelector(["Jav", "♨️ ", " "]),
     JAVA_COLOR = Red,
     JAVA_DETECT_VERSION = true,
 }
 // Not yet implemented
 version (julia) enum {
-    JULIA_SYMBOL = "ஃ",
+    JULIA_SYMBOL = iconSelector(["Jul", "ஃ", " "]),
     JULIA_COLOR = Green,
     JULIA_DETECT_VERSION = true,
 }
 version (nodejs) enum {
-    NODE_SYMBOL = "⬢ ",
+    NODE_SYMBOL = iconSelector(["Js", "⬢ ", " "]),
     NODE_COLOR = Green,
     NODE_DETECT_VERSION = NodeDetectVersion.IfNoNvmrc,
 }
 // Not yet implemented
 version (php) enum {
-    PHP_SYMBOL = "🐘",
+    PHP_SYMBOL = iconSelector(["Php", "🐘", " "]),
     PHP_COLOR = Blue,
     PHP_DETECT_VERSION = true,
 }
 version (python) enum {
-    PYTHON_SYMBOL = "🐍",
+    PYTHON_SYMBOL = iconSelector(["Py", "🐍", " "]),
     PYTHON_COLOR = Yellow,
     PYTHON_DETECT_VERSION = PythonDetectVersion.IfNoVenv,
 }
 // Not yet implemented
 version (ruby) enum {
-    RUBY_SYMBOL = "💎",
+    RUBY_SYMBOL = iconSelector(["Rb", "💎", " "]),
     RUBY_COLOR = Red,
     RUBY_DETECT_VERSION = RubyDetectVersion.IfNoGemfile,
 }
 // Not yet implemented
 version (rust) enum {
-    RUST_SYMBOL = "🦀",
+    RUST_SYMBOL = iconSelector(["Rs", "🦀", " "]),
     RUST_COLOR = Red,
     RUST_DETECT_VERSION = RustDetectVersion.IfNoConfigToml,
 }
 // Not yet implemented
 version (swift) enum {
-    SWIFT_SYMBOL = "🐦",
+    SWIFT_SYMBOL = iconSelector(["Sw", "🐦", " "]),
     SWIFT_COLOR = Yellow,
     SWIFT_DETECT_VERSION = RubyDetectVersion.IfNoGemfile,
 }
 // Not yet implemented
 version (xcode) enum {
-    XCODE_SYMBOL = "🛠 ",
+    XCODE_SYMBOL = iconSelector(["X", "🛠 ", "🛠 "]),
     XCODE_COLOR = Blue,
     XCODE_DETECT_VERSION = RubyDetectVersion.IfNoGemfile,
 }
 version (zig) enum {
-    ZIG_SYMBOL = "🇿 ",
+    ZIG_SYMBOL = iconSelector(["Zig", "🇿 ", " "]),
     ZIG_COLOR = Yellow,
     ZIG_DETECT_VERSION = true,
 }
