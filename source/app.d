@@ -15,6 +15,8 @@ import std.range;
 import std.stdio;
 import std.traits;
 
+import core.memory;
+
 int program(string[] args) {
     switch (cmd(args)) {
         case Hook.PreCommand:
@@ -32,6 +34,7 @@ int program(string[] args) {
 }
 
 int main(string[] args) {
+    version(nogc) GC.disable;
     version (timing) {
         import std.datetime.stopwatch;
 

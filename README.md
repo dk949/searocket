@@ -57,6 +57,9 @@ very perceptible.
   * `timing`
     * Total execution time for the prompt.
     * For debug only
+  * `nogc`
+    * Do not collect memory
+    * I was unable to measure any performance difference when using this option
 * Integrations
   * `bun`
   * `d`
