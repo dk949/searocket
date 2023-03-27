@@ -21,3 +21,9 @@ uninstall:
 	@echo "uninstalling zsh script from $(ZSH_FILE_LOCATION)"
 	rm -f $(PREFIX)/bin/searocket
 	rm -f $(ZSH_FILE_LOCATION)/searocket.zsh
+
+
+clean:
+	rm -f searocket
+
+.PHONY: clean all
