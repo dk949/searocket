@@ -92,6 +92,6 @@ See [configOpts.md](configOpts.md) for the full list.
 Most of the code is written by me and licensed under the MIT license (see
 `LICENSE` file).
 
-Regular expressions used for parsing git status are from the spaceship prmpt
+Regular expressions used for parsing git status are from the spaceship prompt
 project and are licensed under the MIT license (see [spaceship prompt
 LICENSE.md](https://github.com/spaceship-prompt/spaceship-prompt/blob/master/LICENSE.md)).
