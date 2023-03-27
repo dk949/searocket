@@ -1,6 +1,5 @@
 module prompt.integrations.elm;
 
-// Note: untested
 version (elm) {
     import prompt.integrations.common;
     import storage;
@@ -10,7 +9,6 @@ version (elm) {
     import std.path;
     import std.string;
     import std.process;
-    import std.stdio;
     import std.conv;
     import std.array;
 
