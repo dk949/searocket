@@ -2,6 +2,9 @@
 
 ![screenshot of using searocket](screenshot.png)
 
+_NOTE: screenshot uses [nerd font with devicons](https://www.nerdfonts.com/),
+this is not required._
+
 [spaceship prompt](https://github.com/spaceship-prompt/spaceship-prompt) is
 pretty good... but it was getting a bit sluggish for my liking. So I made this
 slimmed down version which does all the heavy lifting in D.
