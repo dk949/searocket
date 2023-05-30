@@ -7,7 +7,8 @@
   "license": "MIT",
   "name": "searocket",
   "preBuildCommands": [
-    "dub scripts/makeintegrations.d source/prompt/integrations/ source/prompt/integrations/package.d"
+    "dub scripts/makeintegrations.d source/prompt/integrations/ source/prompt/integrations/package.d",
+    "dub scripts/makezshfile.d zsh/searocket.zsh"
   ],
   "versions": [
     "nogc",

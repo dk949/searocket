@@ -14,3 +14,4 @@ searocket-test-*
 *.obj
 *.lst
 source/prompt/integrations/package.d
+zsh
