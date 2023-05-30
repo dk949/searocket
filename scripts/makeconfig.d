@@ -1,9 +1,3 @@
-#!/usr/bin/env dub
-/+dub.json:
-{
-    "name": "makeconfig"
-}
-+/
 import std.stdio : stderr, stdout;
 import std.file : write, mkdirRecurse;
 import std.process : execute, executeShell;

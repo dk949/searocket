@@ -1,10 +1,3 @@
-#!/usr/bin/env dub
-/+dub.json:
-{
-    "name": "makezshfile"
-}
-+/
-
 import std.process;
 import std.stdio;
 import std.path;
