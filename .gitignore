@@ -15,3 +15,4 @@ searocket-test-*
 *.lst
 source/prompt/integrations/package.d
 zsh
+views

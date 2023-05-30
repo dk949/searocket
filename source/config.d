@@ -24,7 +24,7 @@ enum {
     // Coming soon
     INCOMPLETE_CMD_COLOR = Yellow,
 
-    USE_ICONS = LanguageIcons.Yes,
+    USE_ICONS = getFromFile!("use_icons"), // checks for existance of a Nerd font.
 }
 
 version (user) enum {
@@ -34,7 +34,7 @@ version (user) enum {
 }
 // 0 means do not truncate
 version (dir) enum {
-    DIR_TRUNCATION = 0,
+    DIR_TRUNCATION = 4,
     DIR_COLOR = Cyan,
 
     // Coming soon

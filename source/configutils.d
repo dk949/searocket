@@ -74,6 +74,10 @@ string iconSelector(string[[EnumMembers!LanguageIcons].length] icons){
     return icons[cast(size_t)USE_ICONS];
 }
 
+auto getFromFile(alias file)(){
+    return mixin(import(file));
+}
+
 import config: D_COMPILER_ORDER;
 import std.algorithm;
 
