@@ -6,7 +6,10 @@ DFLAGS = -b release
 INSTALL_DIR = $(DESTDIR)$(PREFIX)/bin
 ZSH_FILE_INSTALL_DIR = $(DESTDIR)$(ZSH_FILE_LOCATION)
 
-searocket: Makefile $(wildcard source/**/*.d)
+views:
+	mkdir views
+
+searocket: Makefile views $(wildcard source/**/*.d)
 	dub build $(DFLAGS)
 
 install: searocket

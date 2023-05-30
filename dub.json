@@ -6,12 +6,10 @@
   "description": "A prompt for zsh",
   "license": "MIT",
   "name": "searocket",
-  "preGenerateCommands": [
-    "dub scripts/makeconfig.d views/"
-  ],
   "preBuildCommands": [
     "dub scripts/makeintegrations.d source/prompt/integrations/ source/prompt/integrations/package.d",
-    "dub scripts/makezshfile.d zsh/searocket.zsh"
+    "dub scripts/makezshfile.d zsh/searocket.zsh",
+    "dub scripts/makeconfig.d views/"
   ],
   "versions": [
     "nogc",
