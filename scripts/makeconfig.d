@@ -5,13 +5,12 @@
 }
 +/
 import std.stdio : stderr, stdout;
-import std.file : write;
+import std.file : write, mkdirRecurse;
 import std.process : execute, executeShell;
 import std.path : chainPath;
 import std.array : array;
 
-enum HasNerdFont
-{
+enum HasNerdFont {
     No = 0,
     Yes = 1,
     Unknown
@@ -29,29 +28,27 @@ HasNerdFont hasNerdFont() {
         return HasNerdFont.Unknown;
 }
 
-int main(string[] args)
-{
-    if (args.length != 2)
-    {
+int main(string[] args) {
+    if (args.length != 2) {
         stderr.writeln("Expected 2 arguments, got ", cast(int) args.length - 1);
         return -1;
     }
-    switch (hasNerdFont)
-    {
-    case HasNerdFont.Yes:
-        args[1].chainPath("use_icons").array.write("LanguageIcons.Yes");
-        stdout.writeln("Note: Detected a Nerd font, using devicons");
-        break;
-    case HasNerdFont.No:
-        stderr.writeln("Warning: Did not detect a Nerd font, using Emoji icons");
-        goto default;
-    case HasNerdFont.Unknown:
-        stderr.writeln(
-            "Warning: fc-list not found, could not detect a Nerd font, using Emoji");
-        goto default;
-    default:
-        args[1].chainPath("use_icons").array.write("LanguageIcons.Emoji");
-        break;
+    args[1].mkdirRecurse();
+    switch (hasNerdFont) {
+        case HasNerdFont.Yes:
+            args[1].chainPath("use_icons").array.write("LanguageIcons.Yes");
+            stdout.writeln("Note: Detected a Nerd font, using devicons");
+            break;
+        case HasNerdFont.No:
+            stderr.writeln("Warning: Did not detect a Nerd font, using Emoji icons");
+            goto default;
+        case HasNerdFont.Unknown:
+            stderr.writeln(
+                "Warning: fc-list not found, could not detect a Nerd font, using Emoji");
+            goto default;
+        default:
+            args[1].chainPath("use_icons").array.write("LanguageIcons.Emoji");
+            break;
     }
 
     return 0;
