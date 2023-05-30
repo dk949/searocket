@@ -37,7 +37,6 @@ build/%.o: $(SRC_DIR)/%.d
 $(OBJ): Makefile config.mk $(GEN) $(INTEG_PKG)
 
 build/searocket: $(OBJ)
-	@echo "OBJ = $(OBJ)"
 	$(DC) $(LDCFLAGS) $^ -of $@
 	strip $@
 
