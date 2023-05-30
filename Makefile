@@ -14,7 +14,7 @@ OBJ				    = $(SRC:$(SRC_DIR)/%.d=build/%.o)
 DEPS			    = $(SRC:$(SRC_DIR)/%.d=build/%.dep)
 
 SCRIPTS	= $(wildcard scripts/*.d)
-GEN		= $(wildcard $(GEN_CONF_DIR)/*)
+GEN		= $(GEN_CONF_DIR)/use_icons
 
 all: build/searocket build/searocket.zsh
 
