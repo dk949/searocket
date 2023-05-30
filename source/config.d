@@ -24,7 +24,8 @@ enum {
     // Coming soon
     INCOMPLETE_CMD_COLOR = Yellow,
 
-    USE_ICONS = getFromFile!("use_icons"), // checks for existance of a Nerd font.
+    /* USE_ICONS is detected automatically.
+       Can be set manually by either editing `views/use_icons` or `source/configutils.d` */
 }
 
 version (user) enum {

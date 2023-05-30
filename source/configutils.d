@@ -70,8 +70,7 @@ enum LanguageIcons {
 }
 
 string iconSelector(string[[EnumMembers!LanguageIcons].length] icons){
-    import config: USE_ICONS;
-    return icons[cast(size_t)USE_ICONS];
+    return icons[cast(size_t)getFromFile!("use_icons")];
 }
 
 auto getFromFile(alias file)(){

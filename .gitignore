@@ -16,3 +16,4 @@ searocket-test-*
 source/prompt/integrations/package.d
 zsh
 views
+build
