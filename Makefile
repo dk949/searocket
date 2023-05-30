@@ -45,13 +45,11 @@ clean:
 	rm -rf build/*
 	rm -f $(INTEG_PKG)
 
-install: searocket
+install: build/searocket build/searocket.zsh
 	@echo "installing executable in $(INSTALL_DIR)"
 	@echo "installing zsh script in $(ZSH_FILE_INSTALL_DIR)"
-	mkdir -p $(INSTALL_DIR)
-	mkdir -p $(ZSH_FILE_INSTALL_DIR)
-	install searocket $(INSTALL_DIR)/searocket
-	install zsh/searocket.zsh $(ZSH_FILE_INSTALL_DIR)/searocket.zsh
+	install -D build/searocket $(INSTALL_DIR)/
+	install -D build/searocket.zsh $(ZSH_FILE_INSTALL_DIR)/
 
 uninstall:
 	@echo "uninstalling executable from $(INSTALL_DIR)"
