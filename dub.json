@@ -11,6 +11,7 @@
     "dub scripts/makezshfile.d zsh/searocket.zsh",
     "dub scripts/makeconfig.d views/"
   ],
+  "mainSourceFile": "source/app.d",
   "versions": [
     "nogc",
     "user",
