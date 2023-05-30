@@ -21,7 +21,7 @@ ___searocket_onExit (){
 }
 
 
-___spacerocket_setup() {
+___searocket_setup() {
     autoload -Uz add-zsh-hook
 
     add-zsh-hook precmd ___searocket_preCommand
@@ -31,7 +31,7 @@ ___spacerocket_setup() {
     VIRTUAL_ENV_DISABLE_PROMPT=true
 }
 
-___spacerocket_setup
+___searocket_setup
 
 ";
 
