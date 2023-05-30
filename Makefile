@@ -1,16 +1,49 @@
 include config.mk
 
-all: searocket
+SRC_DIR			= source
+GEN_CONF_DIR	= views
+VERSIONS        = $(UTILS) $(INTEGRATIONS)
 
-DFLAGS = -b release
-INSTALL_DIR = $(DESTDIR)$(PREFIX)/bin
-ZSH_FILE_INSTALL_DIR = $(DESTDIR)$(ZSH_FILE_LOCATION)
+DCFLAGS		+= -m64 -J$(GEN_CONF_DIR) -I$(SRC_DIR) $(VERSIONS:%=-d-version %)
+LDCFLAGS	+= -L-ldl -m64
 
-views:
-	mkdir views
+INTEG_FILES			= $(INTEGRATIONS:%=$(SRC_DIR)/prompt/integrations/%.d) $(SRC_DIR)/prompt/integrations/common.d
+INTEG_PKG			= $(SRC_DIR)/prompt/integrations/package.d
+SRC				    = $(shell find $(SRC_DIR) -maxdepth 2 -name *.d) $(INTEG_FILES) $(INTEG_PKG)
+OBJ				    = $(SRC:$(SRC_DIR)/%.d=build/%.o)
+DEPS			    = $(SRC:$(SRC_DIR)/%.d=build/%.dep)
 
-searocket: Makefile views $(wildcard source/**/*.d)
-	dub build $(DFLAGS)
+SCRIPTS	= $(wildcard scripts/*.d)
+GEN		= $(wildcard $(GEN_CONF_DIR)/*)
+
+all: build/searocket build/searocket.zsh
+
+scripts/%: scripts/%.d
+	$(DC) $< -of $@
+
+$(INTEG_PKG): scripts/makeintegrations $(INTEG_FILES)
+	$< $(SRC_DIR)/prompt/integrations/ $@
+
+build/searocket.zsh: scripts/makezshfile
+	$< $@
+
+$(GEN_CONF_DIR)/use_icons: scripts/makeconfig
+	$< $(GEN_CONF_DIR)
+
+build/%.o: $(SRC_DIR)/%.d
+	@mkdir -p $(dir $@)
+	$(DC) --makedeps=$(basename $@).dep $(DCFLAGS) $< -of $@ -c
+
+$(OBJ): Makefile config.mk $(GEN) $(INTEG_PKG)
+
+build/searocket: $(OBJ)
+	@echo "OBJ = $(OBJ)"
+	$(DC) $(LDCFLAGS) $^ -of $@
+	strip $@
+
+clean:
+	rm -rf build/*
+	rm -f $(INTEG_PKG)
 
 install: searocket
 	@echo "installing executable in $(INSTALL_DIR)"
@@ -27,7 +60,4 @@ uninstall:
 	rm -f $(ZSH_FILE_INSTALL_DIR)/searocket.zsh
 
 
-clean:
-	rm -f searocket
-
-.PHONY: clean all
+-include $(DEPS)
