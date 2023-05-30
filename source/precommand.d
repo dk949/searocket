@@ -12,7 +12,7 @@ int preCommand(Mode mode) {
     final switch (mode) {
         case Mode.Prompt:
             if (store[Prop.Exec] && store[Prop.Exec].to!int) {
-                checkGit();
+                version(git) checkGit();
                 checkEnv();
             }
             writeln(mainPrompt);

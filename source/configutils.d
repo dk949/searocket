@@ -77,10 +77,12 @@ auto getFromFile(alias file)(){
     return mixin(import(file));
 }
 
-import config: D_COMPILER_ORDER;
-import std.algorithm;
+version (d){
+    import config: D_COMPILER_ORDER;
+    import std.algorithm;
 
-static assert(D_COMPILER_ORDER.all!(c => c == "ldc" || c == "dmd" || c == "gdc"), "Unsupported Dlang compiler");
+    static assert(D_COMPILER_ORDER.all!(c => c == "ldc" || c == "dmd" || c == "gdc"), "Unsupported Dlang compiler");
+}
 
 version (battery) static assert(0, "battery not yet implemented");
 version (docker) static assert(0, "docker not yet implemented");
