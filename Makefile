@@ -5,7 +5,7 @@ GEN_CONF_DIR	= views
 VERSIONS        = $(UTILS) $(INTEGRATIONS)
 
 DCFLAGS		+= -m64 -J$(GEN_CONF_DIR) -I$(SRC_DIR) $(VERSIONS:%=-d-version %)
-LDCFLAGS	+= -L-ldl -m64
+LDCFLAGS	+= -L-ldl -m64 -static
 
 INTEG_FILES			= $(INTEGRATIONS:%=$(SRC_DIR)/prompt/integrations/%.d) $(SRC_DIR)/prompt/integrations/common.d
 INTEG_PKG			= $(SRC_DIR)/prompt/integrations/package.d
