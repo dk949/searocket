@@ -11,42 +11,37 @@ slimmed down version which does all the heavy lifting in D.
 
 ## Build and install
 
-It is recommended to use
-[ldc](https://github.com/ldc-developers/ldc#installation), but
-[dmd](https://dlang.org/download.html#dmd) is also supported.
+[ldc](https://github.com/ldc-developers/ldc#installation) is required to build
+due to the use of some non standard complier flags.
 
-Requires [dub](https://github.com/dlang/dub/releases) and `make` (technically
-doesn't require make, you can just read the `Makefile` and do the same thing
-manually).
-
-Use the `PREFIX` and `ZSH_FILE_LOCATION` environment variables to set the prefix
-and the location of the zsh file (or use the defaults.)
+The prompt can be built using
 
 ``` sh
 make
-PREFIX=/path/to/prefix ZSH_FILE_LOCATION=/path/to/searocket/zsh/file make install
+make install
 ```
 
-You will need to source the `searocket.zsh` file from your `.zshrc`. E.g.:
+You will need to source the generated `searocket.zsh` file from your `.zshrc`.
+By default `/usr/share/searcoket/searocket.szh`, see
+[Build flags](#build-flags) section for details.
 
 ``` sh
-echo ". /path/to/searocket.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc"
+echo ".  /usr/share/searcoket/searocket.szh" >> ${ZDOTDIR:-$HOME}/.zshrc"
 ```
 
-## Config
+## Configuration
 
-The basic idea is that all configuration is done at compile time. This would
-require the user to have the [D toolchain](https://dlang.org/download.html)
-setup.
+All configuration is done at compile time by enabling different compilation flags.
 
-Integrations can be enabled by adding to the `versions` array in `dub.json`.
+Features can be enabled by modifying the `UTILS` and `INTEGRATIONS` arrays
+in `config.mk`.
 
-Enabling more integrations will cause the prompt to be slower, but this is not
+Enabling more features will cause the prompt to be slower, but this is not
 very perceptible.
 
-### supported `versions` values
+### supported features
 
-* Utility
+* `UTILS`
   * `dir`
     * Print current directory
   * `exitcode`
@@ -63,7 +58,7 @@ very perceptible.
   * `nogc`
     * Do not collect memory
     * I was unable to measure any performance difference when using this option
-* Integrations
+* `INTEGRATIONS`
   * `bun`
   * `d`
   * `elm`
@@ -89,6 +84,18 @@ very perceptible.
 
 See [configOpts.md](configOpts.md) for the full list.
 
+### Build flags
+
+| Variable            | default                     |
+| ------------------- | --------------------------- |
+| `DESTDIR`           | ` `                         |
+| `PREFIX`            | `/usr`                      |
+| `ZSH_FILE_LOCATION` | `${PREFIX}/share/searocket` |
+
+
+`searocket` will be installed to `${DESTDIR}${PREFIX}/bin/searocket`.
+
+`searocket.zsh` file will be installed to `${DESTDIR}${ZSH_FILE_LOCATION}/searocket.zsh`.
 
 ## License
 
