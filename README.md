@@ -64,6 +64,7 @@ very perceptible.
   * `elm`
   * `git`
   * `go`
+  * `nix`
   * `nodejs`
   * `python`
   * `zig`
