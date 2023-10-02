@@ -23,6 +23,7 @@ INTEGRATIONS = bun    \
                elm    \
                git    \
                go     \
+               nix    \
                nodejs \
                python \
                zig

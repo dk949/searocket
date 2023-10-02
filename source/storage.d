@@ -33,6 +33,7 @@ enum Prop {
     InRubyProject,
     InRustProject,
     InZigProject,
+    InNixProject,
 }
 
 Storage store;
@@ -120,6 +121,7 @@ class Storage {
                 case Prop.InElmProject:
                 case Prop.InNodeProject:
                 case Prop.InZigProject:
+                case Prop.InNixProject:
                 case Prop.InPyEnv:
                     file.writeln("");
                     break;

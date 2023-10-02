@@ -194,3 +194,8 @@ version (zig) enum {
     ZIG_COLOR = Yellow,
     ZIG_DETECT_VERSION = true,
 }
+
+version (nix) enum {
+    NIX_SYMBOL = iconSelector(["Nix", "❄️ ", "󱄅 "]),
+    NIX_COLOR = Cyan,
+}
