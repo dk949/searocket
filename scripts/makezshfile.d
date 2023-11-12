@@ -29,6 +29,8 @@ ___searocket_setup() {
     add-zsh-hook zshexit ___searocket_onExit
 
     VIRTUAL_ENV_DISABLE_PROMPT=true
+
+    ___searocket_preExec
 }
 
 ___searocket_setup
