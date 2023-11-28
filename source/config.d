@@ -150,7 +150,7 @@ version (julia) enum {
     JULIA_DETECT_VERSION = true,
 }
 version (nodejs) enum {
-    NODE_SYMBOL = iconSelector(["Js", "⬢ ", " "]),
+    NODE_SYMBOL = iconSelector(["Js", "⬢ ", "󰎙 "]),
     NODE_COLOR = Green,
     NODE_DETECT_VERSION = NodeDetectVersion.IfNoNvmrc,
 }
