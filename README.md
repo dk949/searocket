@@ -22,7 +22,7 @@ make install
 ```
 
 You will need to source the generated `searocket.zsh` file from your `.zshrc`.
-By default `/usr/share/searcoket/searocket.szh`, see
+By default `/usr/share/searocket/searocket.zsh`, see
 [Build flags](#build-flags) section for details.
 
 ``` sh
