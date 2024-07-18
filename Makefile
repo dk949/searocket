@@ -13,8 +13,9 @@ SRC				    = $(shell find $(SRC_DIR) -maxdepth 2 -name *.d) $(INTEG_FILES) $(INT
 OBJ				    = $(SRC:$(SRC_DIR)/%.d=build/%.o)
 DEPS			    = $(SRC:$(SRC_DIR)/%.d=build/%.dep)
 
-SCRIPTS	= $(wildcard scripts/*.d)
-GEN		= $(GEN_CONF_DIR)/use_icons
+SCRIPTS    = $(wildcard scripts/*.d)
+SCRIPT_EXE = $(SCRIPTS:%.d=%)
+GEN        = $(GEN_CONF_DIR)/use_icons
 
 all: build/searocket build/searocket.zsh
 
@@ -43,6 +44,7 @@ build/searocket: $(OBJ)
 clean:
 	rm -rf build/*
 	rm -f $(INTEG_PKG)
+	rm -f $(SCRIPT_EXE)
 
 install: build/searocket build/searocket.zsh
 	@echo "installing executable in $(INSTALL_DIR)"
