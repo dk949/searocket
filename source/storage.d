@@ -50,6 +50,13 @@ class Storage {
         return m_handle.name;
     }
 
+    void writeout() {
+        m_handle.rewind;
+        foreach (line; data)
+            m_handle.writeln(line);
+        close();
+    }
+
     void close() {
         m_handle.close;
     }
@@ -75,12 +82,6 @@ class Storage {
         debug if (!m_handle.isOpen)
             dbgthrow!Exception("accessing storage after it was closed");
         return data[prop];
-    }
-
-    ~this() {
-        m_handle.rewind;
-        foreach (line; data)
-            m_handle.writeln(line);
     }
 
     private static Storage instance = null;

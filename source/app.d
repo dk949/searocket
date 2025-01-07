@@ -18,19 +18,23 @@ import std.traits;
 import core.memory;
 
 int program(string[] args) {
-    switch (cmd(args)) {
+    int ret = 0;
+    final switch (cmd(args)) {
         case Hook.PreCommand:
-            return preCommand(args.mode);
+            ret = preCommand(args.mode);
+            break;
         case Hook.PreExec:
             store[Prop.Exec] = true.storeAs!bool;
             store[Prop.StartTime] = Clock.currStdTime.storeAs!string;
-            return 0;
+            break;
         case Hook.OnExit:
             remove(store.name);
-            return 0;
-        default:
-            dbgthrow!Exception("Unknown Hook enum member");
+            break;
     }
+
+    store.writeout();
+
+    return ret;
 }
 
 int main(string[] args) {
