@@ -40,7 +40,7 @@ version (python) {
             if (venv == "python")
                 a.append(PYTHON_SYMBOL);
             else
-                a.append(PYTHON_SYMBOL,"@", venv);
+                a.append(PYTHON_SYMBOL, "@", venv);
         }
     }
 }

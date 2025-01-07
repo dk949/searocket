@@ -1,4 +1,5 @@
 module prompt.integrations.battery;
+
 version (battery) {
     import std.array;
 

@@ -61,7 +61,6 @@ enum BatteryShow {
     Low,
 }
 
-
 /// Use nerd-font dev icons for languages?
 enum LanguageIcons {
     No,
@@ -69,15 +68,15 @@ enum LanguageIcons {
     Yes,
 }
 
-string iconSelector(string[[EnumMembers!LanguageIcons].length] icons){
-    return icons[cast(size_t)getFromFile!("use_icons")];
+string iconSelector(string[[EnumMembers!LanguageIcons].length] icons) {
+    return icons[cast(size_t) getFromFile!("use_icons")];
 }
 
-auto getFromFile(alias file)(){
+auto getFromFile(alias file)() {
     return mixin(import(file));
 }
 
-version (d){
+version (d) {
     import config: D_COMPILER_ORDER;
     import std.algorithm;
 

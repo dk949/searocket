@@ -38,7 +38,8 @@ int program(string[] args) {
 }
 
 int main(string[] args) {
-    version(nogc) GC.disable;
+    version (nogc)
+        GC.disable;
     version (timing) {
         import std.datetime.stopwatch;
 

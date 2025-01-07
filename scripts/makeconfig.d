@@ -1,8 +1,8 @@
-import std.stdio : stderr, stdout;
-import std.file : write, mkdirRecurse;
-import std.process : execute, executeShell;
-import std.path : chainPath;
-import std.array : array;
+import std.stdio: stderr, stdout;
+import std.file: write, mkdirRecurse;
+import std.process: execute, executeShell;
+import std.path: chainPath;
+import std.array: array;
 
 enum HasNerdFont {
     No = 0,
@@ -11,14 +11,14 @@ enum HasNerdFont {
 }
 
 HasNerdFont hasNerdFont() {
-    try
+    try {
         if (execute(["which", "fc-list"]).status)
             return HasNerdFont.Unknown;
         else if (executeShell("fc-list | grep -iq 'nerd'").status)
             return HasNerdFont.No;
         else
             return HasNerdFont.Yes;
-    catch (Exception e)
+    } catch (Exception e)
         return HasNerdFont.Unknown;
 }
 

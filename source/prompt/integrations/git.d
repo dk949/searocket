@@ -1,5 +1,6 @@
 module prompt.integrations.git;
 import config;
+
 version (git) {
 
     import common;

@@ -1,4 +1,5 @@
 module prompt.integrations.d;
+
 version (d) {
     import prompt.integrations.common;
     import storage;

@@ -38,8 +38,8 @@ ___searocket_setup
 ";
 
 int main(string[] args) {
-    if(args.length != 2) {
-        stderr.writeln("Expected 1 argument got ", cast(int)args.length - 1);
+    if (args.length != 2) {
+        stderr.writeln("Expected 1 argument got ", cast(int) args.length - 1);
         return -1;
     }
     immutable filename = args[1];
@@ -47,15 +47,17 @@ int main(string[] args) {
 
     immutable desc = std.process.execute(["git", "-C", cwd, "describe"]);
 
-    if(desc.status) {
-        stderr.writefln("`git describe` failed with exit code %d and message:\n%s", desc.status, desc.output);
+    if (desc.status) {
+        stderr.writefln(
+            "`git describe` failed with exit code %d and message:\n%s",
+            desc.status, desc.output);
         return desc.status;
     }
     try {
         filename.dirName.mkdirRecurse();
         auto fp = File(filename, "w");
         fp.writef(template_, desc.output.strip());
-    } catch(Exception e) {
+    } catch (Exception e) {
         stderr.writeln("could not open or write to file: ", e.message);
         return -2;
     }

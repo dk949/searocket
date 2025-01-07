@@ -1,4 +1,5 @@
 module prompt.integrations.bun;
+
 version (bun) {
     import prompt.integrations.common;
     import storage;

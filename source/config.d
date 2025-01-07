@@ -22,10 +22,9 @@ enum {
     SUCCESS_COLOR = Green,
     FAILURE_COLOR = BoldRed,
     // Coming soon
-    INCOMPLETE_CMD_COLOR = Yellow,
-
-    /* USE_ICONS is detected automatically.
+    INCOMPLETE_CMD_COLOR = Yellow, /* USE_ICONS is detected automatically.
        Can be set manually by either editing `views/use_icons` or `source/configutils.d` */
+
 }
 
 version (user) enum {
@@ -97,12 +96,12 @@ version (d) enum {
 }
 // Not yet implemented
 version (docker) enum {
-    DOCKER_SYMBOL = iconSelector(["Dock",  "🐳", " "]),
+    DOCKER_SYMBOL = iconSelector(["Dock", "🐳", " "]),
     DOCKER_COLOR = Cyan,
 }
 // Not yet implemented
 version (elixir) enum {
-    ELIXIR_SYMBOL =  iconSelector(["Elx", "💧", " "]),
+    ELIXIR_SYMBOL = iconSelector(["Elx", "💧", " "]),
     ELIXIR_COLOR = Magenta,
     ELIXIR_DETECT_VERSION = true,
 }
@@ -116,15 +115,15 @@ version (git) enum {
     GIT_COLOR = Magenta,
     GIT_STATUS_COLOR = Red,
     GIT_UNTRACKED_CHAR = "?",
-    GIT_ADDED_CHAR    = iconSelector(["+" ,"+" ," "]),
-    GIT_MODIFIED_CHAR = iconSelector(["!" ,"!" ," "]),
-    GIT_RENAMED_CHAR  = iconSelector([">" ,"»" ," "]),
-    GIT_DELETED_CHAR  = iconSelector(["X" ,"✘" ," "]),
-    GIT_STASHED_CHAR  = iconSelector(["$" ,"$" ,"$"]),
-    GIT_UNMERGED_CHAR = iconSelector(["=" ,"=" ,""]),
-    GIT_AHEAD_CHAR    = iconSelector(["^" ,"⇡" ,"⇡"]),
-    GIT_BEHIND_CHAR   = iconSelector(["v" ,"⇣" ,"⇣"]),
-    GIT_DIVERGED_CHAR = iconSelector(["|" ,"⇕" ,"⇕"]),
+    GIT_ADDED_CHAR = iconSelector(["+", "+", " "]),
+    GIT_MODIFIED_CHAR = iconSelector(["!", "!", " "]),
+    GIT_RENAMED_CHAR = iconSelector([">", "»", " "]),
+    GIT_DELETED_CHAR = iconSelector(["X", "✘", " "]),
+    GIT_STASHED_CHAR = iconSelector(["$", "$", "$"]),
+    GIT_UNMERGED_CHAR = iconSelector(["=", "=", ""]),
+    GIT_AHEAD_CHAR = iconSelector(["^", "⇡", "⇡"]),
+    GIT_BEHIND_CHAR = iconSelector(["v", "⇣", "⇣"]),
+    GIT_DIVERGED_CHAR = iconSelector(["|", "⇕", "⇕"]),
 }
 version (go) enum {
     GO_SYMBOL = iconSelector(["Go", "🐹", " "]),
