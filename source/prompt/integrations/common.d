@@ -1,6 +1,11 @@
 module prompt.integrations.common;
-import std.file;
-import std.path;
+
+import common: dbgthrow;
+
+import std.file: dirEntries, DirEntry, SpanMode, getcwd;
+import std.path: baseName, dirName, rootName;
+import std.process: execute, ProcessException;
+import std.string: stripRight;
 
 auto findFile(alias Fn)() {
     alias Ret = typeof(Fn(declval!DirEntry));
@@ -24,10 +29,6 @@ string findFile(string name) {
 }
 
 string versionString(string exe, string param = "--version")() {
-    import std.process;
-    import std.string;
-    import common;
-
     try {
         const e = execute([exe, param]);
         if (e.status != 0)

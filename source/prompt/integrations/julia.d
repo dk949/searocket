@@ -2,11 +2,11 @@ module prompt.integrations.julia;
 
 // Note: untested
 version (julia) {
-    import prompt.integrations.common;
-    import storage;
+    import prompt.integrations.common: findFile;
+    import storage: store, Prop, storeAs;
 
-    import std.path;
-    import std.array;
+    import std.path: baseName;
+    import std.array: Appender;
 
     void checkJulia() {
         store[Prop.InJuliaProject] = findFile!(

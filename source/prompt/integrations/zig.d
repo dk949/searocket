@@ -1,16 +1,14 @@
 module prompt.integrations.zig;
 version (zig) {
-    import storage;
-    import config;
-    import common;
-    import prompt.integrations.common;
+    import prompt.integrations.common: findFile, versionString;
+    import storage: store, Prop;
+    import config: ZIG_COLOR, ZIG_SYMBOL, ZIG_DETECT_VERSION;
+    import common: append;
 
-    import std.path;
-    import std.array;
-    import std.algorithm;
+    import std.array: Appender;
+    import std.algorithm: splitter;
 
     void checkZig() {
-
         if (!findFile("build.zig")) {
             store[Prop.InZigProject] = "";
             return;

@@ -2,11 +2,7 @@ module prompt.integrations.xcode;
 
 // Note: untested
 version (xcode) {
-    import prompt.integrations.common;
-    import storage;
-
-    import std.path;
-    import std.array;
+    import std.array: Appender;
 
     void checkXcode() {
     }

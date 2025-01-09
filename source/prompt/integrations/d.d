@@ -1,16 +1,15 @@
 module prompt.integrations.d;
 
 version (d) {
-    import prompt.integrations.common;
-    import storage;
-    import common;
-    import config;
+    import prompt.integrations.common: versionString, findFile;
+    import storage: store, Prop;
+    import common: append;
+    import config: D_DETECT_VERSION, DDetectVersion, D_COLOR, D_SYMBOL, D_COMPILER_ORDER;
 
-    import std.algorithm;
-    import std.typecons;
-    import std.array;
-    import std.path;
-    import std.process;
+    import std.algorithm: splitter, countUntil;
+    import std.array: Appender;
+    import std.path: baseName;
+    import std.process: environment;
 
     void checkD() {
 

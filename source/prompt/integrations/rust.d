@@ -2,11 +2,10 @@ module prompt.integrations.rust;
 
 // Note: untested
 version (rust) {
-    import prompt.integrations.common;
-    import storage;
+    import prompt.integrations.common: findFile;
+    import storage: store, Prop, storeAs;
 
-    import std.path;
-    import std.array;
+    import std.array: Appender;
 
     void checkRust() {
         store[Prop.InRustProject] = findFile("Cargo.toml").storeAs!bool;

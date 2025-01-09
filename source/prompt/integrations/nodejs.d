@@ -1,14 +1,15 @@
 module prompt.integrations.nodejs;
 version (nodejs) {
 
-    import prompt.integrations.common;
-    import storage;
-    import common;
-    import config;
+    import prompt.integrations.common: findFile;
+    import storage: store, Prop;
+    import common: append;
+    import config: NODE_DETECT_VERSION, NODE_COLOR, NODE_SYMBOL, NodeDetectVersion;
 
-    import std.string;
-    import std.file;
-    import std.array;
+    import std.string: strip;
+    import std.file: readText;
+    import std.array: Appender;
+    import std.process: execute;
 
     void checkNodejs() {
         string ver;
@@ -29,7 +30,6 @@ version (nodejs) {
     }
 
     string detectVersion() {
-        import std.process;
 
         const res = execute(["node", "-v"]);
         if (res.status == 0)

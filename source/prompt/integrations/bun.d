@@ -1,13 +1,13 @@
 module prompt.integrations.bun;
 
 version (bun) {
-    import prompt.integrations.common;
-    import storage;
-    import config;
-    import common;
+    import prompt.integrations.common: versionString, findFile;
+    import storage: store, Prop;
+    import config: BUN_SYMBOL, BUN_COLOR, BUN_DETECT_VERSION;
+    import common: append;
 
-    import std.path;
-    import std.array;
+    import std.path: baseName;
+    import std.array: Appender;
 
     void checkBun() {
 

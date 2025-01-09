@@ -1,3 +1,5 @@
+module config;
+
 /*
  _____ ____ ___ _____      __  __ _____
 | ____|  _ \_ _|_   _|    |  \/  | ____|
@@ -5,11 +7,10 @@
 | |___| |_| | |  | |      | |  | | |___
 |_____|____/___| |_|      |_|  |_|_____|
 */
-
-module config;
 public import configutils;
 import prompt.colors;
-import std.datetime;
+
+import std.datetime: dur;
 
 // To enable a section of this config, add the `version` to the `versions` list in `dub.json`
 
@@ -24,6 +25,8 @@ enum {
     // Coming soon
     INCOMPLETE_CMD_COLOR = Yellow, /* USE_ICONS is detected automatically.
        Can be set manually by either editing `views/use_icons` or `source/configutils.d` */
+
+
 
 }
 

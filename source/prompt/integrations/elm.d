@@ -1,16 +1,15 @@
 module prompt.integrations.elm;
 
 version (elm) {
-    import prompt.integrations.common;
-    import storage;
-    import common;
-    import config;
+    import prompt.integrations.common: versionString, findFile;
+    import storage: store, Prop;
+    import common: append;
+    import config: ELM_COLOR, ELM_SYMBOL, ELM_DETECT_VERSION, ElmDetectVersion;
 
-    import std.path;
-    import std.string;
-    import std.process;
-    import std.conv;
-    import std.array;
+    import std.path: baseName;
+    import std.array: Appender;
+    import std.json: parseJSON;
+    import std.file: readText;
 
     void checkElm() {
         string ver = "";
@@ -38,9 +37,6 @@ version (elm) {
     }
 
     private string detectVersionElmJson(string file) {
-        import std.json;
-        import std.file;
-
         const json = file.readText.parseJSON;
         if ("elm-version" in json) {
             return json["elm-version"].str;

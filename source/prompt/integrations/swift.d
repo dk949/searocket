@@ -2,11 +2,7 @@ module prompt.integrations.swift;
 
 // Note: untested
 version (swift) {
-    import prompt.integrations.common;
-    import storage;
-
-    import std.path;
-    import std.array;
+    import std.array: Appender;
 
     void checkSwift() {
     }

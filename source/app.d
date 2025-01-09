@@ -1,21 +1,21 @@
-import common;
-import args;
+import args: cmd, mode;
+import precommand: preCommand;
+import storage: store, storeAs, Prop;
+import prompt: Hook;
 
-import precommand;
-import storage;
-import prompt;
+import std.conv: to;
+import std.datetime: Clock;
+import std.file: remove;
 
-import std.algorithm;
-import std.conv;
-import std.datetime;
-import std.file;
-import std.path;
-import std.process;
-import std.range;
-import std.stdio;
-import std.traits;
+import core.memory: GC;
 
-import core.memory;
+version (timing) {
+    import std.datetime.stopwatch: StopWatch, AutoStart;
+    import std.stdio: write;
+}
+debug {
+    import std.stdio: stderr;
+}
 
 int program(string[] args) {
     int ret = 0;
@@ -41,8 +41,6 @@ int main(string[] args) {
     version (nogc)
         GC.disable;
     version (timing) {
-        import std.datetime.stopwatch;
-
         auto sw = StopWatch(AutoStart.yes);
         scope (exit) {
             sw.stop;
@@ -54,7 +52,7 @@ int main(string[] args) {
         try
             return program(args);
         catch (Exception e) {
-            writeln("ERROR: ", e);
+            stderr.writeln("ERROR: ", e);
             return 2;
         }
     } else {

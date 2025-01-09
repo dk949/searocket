@@ -1,7 +1,7 @@
 module prompt.integrations.battery;
 
 version (battery) {
-    import std.array;
+    import std.array: Appender;
 
     void checkBattery() {
     }

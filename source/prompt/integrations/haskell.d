@@ -2,11 +2,10 @@ module prompt.integrations.haskell;
 
 // Note: untested
 version (haskell) {
-    import prompt.integrations.common;
-    import storage;
+    import prompt.integrations.common: findFile;
+    import storage: store, Prop, storeAs;
 
-    import std.path;
-    import std.array;
+    import std.array: Appender;
 
     void checkHaskell() {
         store[Prop.InHaskellProject] = findFile("stack.yalm").storeAs!bool;

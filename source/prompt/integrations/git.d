@@ -1,22 +1,32 @@
 module prompt.integrations.git;
-import config;
 
 version (git) {
 
-    import common;
-    import prompt.colors;
-    import prompt.integrations.common;
-    import storage;
+    import common: append;
+    import config: GIT_ADDED_CHAR,
+        GIT_AHEAD_CHAR,
+        GIT_BEHIND_CHAR,
+        GIT_CHAR,
+        GIT_COLOR,
+        GIT_DELETED_CHAR,
+        GIT_DIVERGED_CHAR,
+        GIT_MODIFIED_CHAR,
+        GIT_RENAMED_CHAR,
+        GIT_STASHED_CHAR,
+        GIT_STATUS_COLOR,
+        GIT_UNMERGED_CHAR,
+        GIT_UNTRACKED_CHAR;
+    import prompt.integrations.common: findFile;
+    import storage: store, storeAs, Prop;
 
-    import std.bitmanip;
-    import std.algorithm;
-    import std.process;
-    import std.string;
-    import std.regex;
-    import std.functional;
-    import std.conv;
-    import std.stdio;
-    import std.array;
+    import std.bitmanip: bitfields;
+    import std.algorithm: any;
+    import std.process: execute;
+    import std.string: stripRight;
+    import std.regex: ctRegex, matchFirst;
+    import std.functional: memoize;
+    import std.conv: to, text;
+    import std.array: Appender;
 
     static assert(GitStatus.sizeof == 2);
     struct GitStatus {
@@ -190,8 +200,6 @@ version (git) {
 private:
 
     string git(S...)(S cmd) {
-        import std.stdio;
-
         const res = execute(["git", cmd]);
         if (res.status != 0)
             return null;

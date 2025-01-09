@@ -1,10 +1,8 @@
 module common;
 
-import std.process;
-import std.functional;
-import std.conv;
-import std.traits;
-import std.array;
+import std.conv: text;
+import std.traits: isInstanceOf;
+import std.array: Appender;
 
 noreturn dbgthrow(E, Args...)(Args msg)
 if (__traits(compiles, new E(msg)) && __traits(compiles, text(msg))) {

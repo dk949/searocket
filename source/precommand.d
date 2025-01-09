@@ -1,11 +1,10 @@
 module precommand;
 
-import common;
-import prompt;
-import storage;
+import prompt: Mode, checkGit, checkEnv, mainPrompt, mainRprompt;
+import storage: store, storeAs, Prop;
 
-import std.stdio;
-import std.conv;
+import std.stdio: writeln;
+import std.conv: to;
 
 public:
 int preCommand(Mode mode) {

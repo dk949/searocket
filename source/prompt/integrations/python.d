@@ -1,16 +1,16 @@
 module prompt.integrations.python;
 version (python) {
 
-    import prompt.integrations.common;
-    import common;
-    import storage;
-    import config;
+    import prompt.integrations.common: findFile;
+    import common: append, EOL;
+    import storage: store, Prop;
+    import config: PYTHON_COLOR, PYTHON_SYMBOL;
 
-    import std.algorithm;
-    import std.array;
-    import std.file;
-    import std.path;
-    import std.process;
+    import std.algorithm: splitter, filter, startsWith;
+    import std.array: Appender, array;
+    import std.file: readText, exists;
+    import std.path: baseName, buildPath;
+    import std.process: environment;
 
     void checkPython() {
         if (const venv = environment.get("VIRTUAL_ENV")) {

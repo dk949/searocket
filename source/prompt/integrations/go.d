@@ -2,14 +2,16 @@ module prompt.integrations.go;
 
 // Note: untested
 version (go) {
-    import prompt.integrations.common;
-    import storage;
-    import common;
-    import config;
+    import prompt.integrations.common: findFile, versionString;
+    import storage: store, Prop;
+    import common: append;
+    import config: GO_COLOR, GO_SYMBOL, GO_DETECT_VERSION, GoDetectVersion;
 
-    import std.path;
-    import std.array;
-    import std.algorithm, std.range;
+    import std.file: readText;
+    import std.path: baseName;
+    import std.array: Appender;
+    import std.algorithm: splitter, filter;
+    import std.range: drop;
 
     void checkGo() {
         const file = findFile!(
@@ -59,8 +61,6 @@ version (go) {
     }
 
     private string versionFromFile(string file) {
-        import std.file;
-
         return versionFromFileImpl(file.readText);
     }
 

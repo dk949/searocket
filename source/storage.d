@@ -1,14 +1,16 @@
 /// Abstraction over persistent storage. Should allow storage method to change in the future
 module storage;
 
-import common;
+debug import common: dbgthrow;
+import common: EOL;
 
-import std.file;
-import std.stdio;
-import std.array;
-import std.range;
-import std.traits;
-import std.conv;
+import std.file: tempDir, exists;
+import std.stdio: File;
+import std.range: only;
+import std.traits: EnumMembers;
+import std.conv: text;
+
+version (Posix) import core.sys.posix.unistd: getppid;
 
 private enum FILE_NAME = "searocket.data";
 
@@ -133,13 +135,11 @@ class Storage {
 }
 
 private int parentProcess() {
-    version (Posix) {
-        import core.sys.posix.unistd;
-
+    version (Posix)
         return getppid();
-    }
+
     // WARNING: UNTESTED CODE AHEAD
-    // basically I don't have a windows computer, but insternet says this should be about right(?)
+    // basically I don't have a windows computer, but internet says this should be about right(?)
     // https://gist.github.com/mattn/253013/d47b90159cf8ffa4d92448614b748aa1d235ebe4
     version (Windows) {
         import core.sys.windows.windows;
@@ -177,13 +177,11 @@ private int parentProcess() {
 }
 
 string storeAs(Ret : string, Arg)(auto ref const Arg thing) {
-    import std.conv;
 
-    return thing.text;
+    return text(thing);
 }
 
 string storeAs(Ret : bool, Arg)(auto ref const Arg thing) {
-    import std.conv;
 
     return text(cast(int)(!!thing));
 }

@@ -1,5 +1,11 @@
 module configutils;
-import std.traits;
+
+import std.traits: EnumMembers;
+
+version (d) {
+    import config: D_COMPILER_ORDER;
+    import std.algorithm: all;
+}
 
 enum NodeDetectVersion {
     No,
@@ -77,15 +83,14 @@ auto getFromFile(alias file)() {
 }
 
 version (d) {
-    import config: D_COMPILER_ORDER;
-    import std.algorithm;
 
     static assert(D_COMPILER_ORDER.all!(c => c == "ldc" || c == "dmd" || c == "gdc"), "Unsupported Dlang compiler");
 }
 
 private
 template VersionError(string ver) {
-    mixin(`version (` ~ ver ~ `) debug {} else static assert(false, "` ~ ver ~ ` not yet implemented");`);
+    mixin(
+        `version (` ~ ver ~ `) debug {} else static assert(false, "` ~ ver ~ ` not yet implemented");`);
 }
 
 mixin VersionError!("battery");

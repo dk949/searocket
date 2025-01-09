@@ -1,15 +1,13 @@
 module prompt.integrations.nix;
 version (nix) {
-    import storage;
+    import storage: store, Prop;
+    import config: NIX_COLOR, NIX_SYMBOL;
+    import common: append;
 
-    import config;
-    import common;
-
-    import std.array;
-    import std.process;
+    import std.array: Appender;
+    import std.process: environment;
 
     void checkNix() {
-
         if (!environment.get("IN_NIX_SHELL"))
             return;
         store[Prop.InNixProject] = "nix";

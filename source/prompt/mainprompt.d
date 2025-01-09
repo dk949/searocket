@@ -1,24 +1,35 @@
 module prompt.mainprompt;
 
-import prompt.integrations;
-import prompt.integrations.git;
-import prompt.colors;
+import prompt.integrations: buildEnv;
+import prompt.integrations.git: buildGit;
+import colors = prompt.colors;
 
-import common;
-import storage;
-import config;
+debug import common: dbgthrow;
+import common: append;
+import storage: store, Prop;
+import config: SHOW_USER,
+    UsrShow,
+    ROOT_USER_COLOR,
+    USER_COLOR,
+    DIR_TRUNCATION,
+    DIR_COLOR,
+    JOBS_COLOR,
+    JOBS_CHAR,
+    SUCCESS_COLOR,
+    EXIT_CODE_COLOR,
+    FAILURE_COLOR,
+    PROMPT_CHAR,
+    TOOK_THRESHOLD,
+    TOOK_CHAR_COLOR,
+    TOOK_CHAR,
+    TOOK_TEXT_COLOR,
+    TOOK_TIME_COLOR;
 
-import core.time;
-import std.algorithm;
-import std.array;
-import std.conv;
-import std.datetime;
-import std.file;
-import std.math.rounding;
-import std.process;
-import std.range;
-import std.stdio;
-import std.traits;
+import std.conv: text, to;
+import std.datetime: Duration, dur, Clock;
+import std.math.rounding: quantize;
+import std.process: environment;
+import std.array: appender;
 
 enum Mode {
     Prompt = "prompt",
@@ -63,7 +74,7 @@ string mainPrompt() {
             a.append(SUCCESS_COLOR);
     }
 
-    a.append(PROMPT_CHAR, Default);
+    a.append(PROMPT_CHAR, colors.Default);
 
     return a.data;
 }
@@ -85,7 +96,7 @@ version (took) string mainRprompt() {
             " took: ",
             TOOK_TIME_COLOR,
             took.prettyPrint,
-            Default);
+            colors.Default);
     return "";
 }
 

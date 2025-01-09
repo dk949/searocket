@@ -1,10 +1,11 @@
 module args;
-import common;
 
-import std.algorithm;
-import std.range;
-import std.traits;
-import prompt;
+debug import common: dbgthrow;
+import prompt: Hook, Mode;
+
+import std.algorithm: canFind;
+import std.range: only;
+import std.traits: EnumMembers;
 
 Hook cmd(string[] args) {
     debug {
