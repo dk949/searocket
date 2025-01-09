@@ -7,12 +7,14 @@ ZSH_FILE_INSTALL_DIR = $(DESTDIR)$(ZSH_FILE_LOCATION)
 
 DC ?= ldc2
 CC ?= gcc
+MODE ?=
 
 DCFLAGS  = -O -release
 LDCFLAGS =
 
-UTILS = nogc     \
-        user     \
+OPTIONS = nogc
+
+UTILS = user     \
         dir      \
         exitcode \
         took     \

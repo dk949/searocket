@@ -2,20 +2,57 @@ include config.mk
 
 SRC_DIR			= source
 GEN_CONF_DIR	= views
-VERSIONS        = $(UTILS) $(INTEGRATIONS)
+VERSIONS        = $($(MODE)OPTIONS) $($(MODE)UTILS) $($(MODE)INTEGRATIONS)
 
-DCFLAGS		+= -m64 -J$(GEN_CONF_DIR) -I$(SRC_DIR) $(VERSIONS:%=-d-version %)
-LDCFLAGS	+= -L-ldl -m64
+DEBUGDCFLAGS    = -g --gc -d-debug
+DEBUGLDCFLAGS   = -g --gc -d-debug
+REAL_DCFLAGS    = $($(MODE)DCFLAGS)
+REAL_LDCFLAGS   = $($(MODE)LDCFLAGS)
 
-INTEG_FILES			= $(INTEGRATIONS:%=$(SRC_DIR)/prompt/integrations/%.d) $(SRC_DIR)/prompt/integrations/common.d
-INTEG_PKG			= $(SRC_DIR)/prompt/integrations/package.d
-SRC				    = $(shell find $(SRC_DIR) -maxdepth 2 -name *.d) $(INTEG_FILES) $(INTEG_PKG)
-OBJ				    = $(SRC:$(SRC_DIR)/%.d=build/%.o)
-DEPS			    = $(SRC:$(SRC_DIR)/%.d=build/%.dep)
+REAL_DCFLAGS    += -m64 -J$(GEN_CONF_DIR) -I$(SRC_DIR) $(VERSIONS:%=-d-version %)
+REAL_LDCFLAGS   += -L-ldl -m64
+
+INTEG_FILES = $($(MODE)INTEGRATIONS:%=$(SRC_DIR)/prompt/integrations/%.d) $(SRC_DIR)/prompt/integrations/common.d
+INTEG_PKG   = $(SRC_DIR)/prompt/integrations/package.d
+SRC         = $(shell find $(SRC_DIR) -maxdepth 2 -name *.d) $(INTEG_FILES) $(INTEG_PKG)
+OBJ         = $(SRC:$(SRC_DIR)/%.d=build/%.o)
+DEPS        = $(SRC:$(SRC_DIR)/%.d=build/%.dep)
 
 SCRIPTS    = $(wildcard scripts/*.d)
 SCRIPT_EXE = $(SCRIPTS:%.d=%)
 GEN        = $(GEN_CONF_DIR)/use_icons
+
+
+DEBUGOPTIONS = nogc \
+               timing
+
+DEBUGUTILS = dir      \
+             exitcode \
+             jobs     \
+             took     \
+             user
+
+DEBUGINTEGRATIONS = battery \
+                    bun     \
+                    d       \
+                    docker  \
+                    elixir  \
+                    elm     \
+                    git     \
+                    go      \
+                    haskell \
+                    java    \
+                    julia   \
+                    nix     \
+                    nodejs  \
+                    php     \
+                    python  \
+                    ruby    \
+                    rust    \
+                    swift   \
+                    xcode   \
+                    zig     \
+
 
 all: build/searocket build/searocket.zsh
 
@@ -33,12 +70,12 @@ $(GEN_CONF_DIR)/use_icons: scripts/makeconfig
 
 build/%.o: $(SRC_DIR)/%.d
 	@mkdir -p $(dir $@)
-	$(DC) --makedeps=$(basename $@).dep $(DCFLAGS) $< -of $@ -c
+	$(DC) --makedeps=$(basename $@).dep $(REAL_DCFLAGS) $< -of $@ -c
 
 $(OBJ): Makefile config.mk $(GEN) $(INTEG_PKG)
 
 build/searocket: $(OBJ)
-	$(DC) $(LDCFLAGS) $^ -of $@
+	$(DC) $(REAL_LDCFLAGS) $^ -of $@
 	strip $@
 
 clean:
