@@ -4,10 +4,15 @@ SRC_DIR			= source
 GEN_CONF_DIR	= views
 VERSIONS        = $($(MODE)OPTIONS) $($(MODE)UTILS) $($(MODE)INTEGRATIONS)
 
+
 DEBUGDCFLAGS    = -g --gc -d-debug
 DEBUGLDCFLAGS   = -g --gc -d-debug
 REAL_DCFLAGS    = $($(MODE)DCFLAGS)
 REAL_LDCFLAGS   = $($(MODE)LDCFLAGS)
+ifdef TESTING
+REAL_DCFLAGS+=--unittest
+REAL_LDCFLAGS+=--unittest
+endif
 
 REAL_DCFLAGS    += -m64 -J$(GEN_CONF_DIR) -I$(SRC_DIR) $(VERSIONS:%=-d-version %)
 REAL_LDCFLAGS   += -L-ldl -m64
