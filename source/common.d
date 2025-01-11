@@ -3,6 +3,7 @@ module common;
 import std.conv: text;
 import std.traits: isInstanceOf;
 import std.array: Appender;
+import std.stdio: stderr;
 
 noreturn dbgthrow(E, Args...)(Args msg)
 if (__traits(compiles, new E(msg)) && __traits(compiles, text(msg))) {
@@ -13,6 +14,10 @@ if (__traits(compiles, new E(msg)) && __traits(compiles, text(msg))) {
         assert(0, text(msg));
     }
     assert(0, "?????");
+}
+
+void dbgwarn(Args...)(Args msg) {
+    debug stderr.writeln("[WARNING]: ", msg);
 }
 
 version (Windows)

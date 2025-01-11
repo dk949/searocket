@@ -1,6 +1,6 @@
 module prompt.integrations.common;
 
-import common: dbgthrow;
+import common: dbgwarn;
 
 import std.file: dirEntries, DirEntry, SpanMode, getcwd;
 import std.path: baseName, dirName, rootName;
@@ -31,8 +31,10 @@ string findFile(string name) {
 string versionString(string exe, string param = "--version")() {
     try {
         const e = execute([exe, param]);
-        if (e.status != 0)
-            dbgthrow!Exception("could not get " ~ exe ~ " version");
+        if (e.status != 0) {
+            dbgwarn("could not get " ~ exe ~ " version");
+            return null;
+        }
         return e.output.stripRight;
     } catch (ProcessException e)
         return null;
