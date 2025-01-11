@@ -8,12 +8,15 @@ version (git) {
         GIT_BEHIND_CHAR,
         GIT_CHAR,
         GIT_COLOR,
+        GIT_COMMIT_CHAR,
         GIT_DELETED_CHAR,
+        GIT_DETACHED_COLOR,
         GIT_DIVERGED_CHAR,
         GIT_MODIFIED_CHAR,
         GIT_RENAMED_CHAR,
         GIT_STASHED_CHAR,
         GIT_STATUS_COLOR,
+        GIT_TAG_CHAR,
         GIT_UNMERGED_CHAR,
         GIT_UNTRACKED_CHAR;
     import prompt.integrations.common: findFile;
@@ -27,7 +30,19 @@ version (git) {
     import std.conv: to, text;
     import std.array: Appender;
 
-    struct GitStatus {
+    private struct GitHead {
+        enum State {
+            None,
+            Branch,
+            Tag,
+            Sha,
+        }
+
+        State state;
+        string value;
+    }
+
+    private struct GitStatus {
         enum RemoteState {
             None,
             Ahead,
@@ -59,7 +74,7 @@ version (git) {
         }
     }
 
-    GitStatus getGitStatus() {
+    private GitStatus getGitStatus() {
         /*
         The expressions used to pare git status are taken directly from
         spaceship prompt, and hence are licensed by them under the MIT license
@@ -110,7 +125,7 @@ version (git) {
 
         // Ahead, behind or diverged
         const ahead = {
-            const a = git("rev-list", "--count", gitBranch ~ "@{upstream}..HEAD");
+            const a = git("rev-list", "--count", gitHead.value ~ "@{upstream}..HEAD");
             if (a)
                 return a.to!int;
             else
@@ -118,7 +133,7 @@ version (git) {
         }();
 
         const behind = {
-            const b = git("rev-list", "--count", "HEAD.." ~ gitBranch ~ "@{upstream}");
+            const b = git("rev-list", "--count", "HEAD.." ~ gitHead.value ~ "@{upstream}");
             if (b)
                 return b.to!int;
             else
@@ -134,6 +149,23 @@ version (git) {
         return output;
     }
 
+    private void buildGitHead(ref Appender!string a) {
+        const branch = gitHead;
+        final switch (branch.state) {
+            case GitHead.State.None:
+                return;
+            case GitHead.State.Branch:
+                a.append(GIT_COLOR, GIT_CHAR, branch.value);
+                return;
+            case GitHead.State.Tag:
+                a.append(GIT_DETACHED_COLOR, GIT_TAG_CHAR, branch.value);
+                return;
+            case GitHead.State.Sha:
+                a.append(GIT_DETACHED_COLOR, GIT_COMMIT_CHAR, branch.value);
+                return;
+        }
+    }
+
     void checkGit() {
         store[Prop.InGitRepo] = findFile(".git").storeAs!bool;
     }
@@ -142,10 +174,8 @@ version (git) {
         if (!(store[Prop.InGitRepo].to!int))
             return;
 
-        const branch = gitBranch;
+        buildGitHead(a);
 
-        if (branch)
-            a.append(GIT_COLOR, GIT_CHAR, branch);
         const status = getGitStatus();
         if (status == status.init)
             return;
@@ -184,7 +214,7 @@ version (git) {
         }
     }
 
-    alias gitBranch = memoize!getGitBranch;
+    alias gitHead = memoize!getGitHead;
 
 private:
 
@@ -195,7 +225,16 @@ private:
         return res.output.stripRight;
     }
 
-    string getGitBranch() {
-        return git("branch", "--show-current");
+    GitHead getGitHead() {
+        const branch_or_head = git("rev-parse", "--abbrev-ref", "HEAD");
+        if (branch_or_head == null)
+            return GitHead(GitHead.State.None, null);
+        else if (branch_or_head == "HEAD") {
+            if (const tag_name = git("describe", "--exact-match", "--tags"))
+                return GitHead(GitHead.State.Tag, tag_name);
+            else
+                return GitHead(GitHead.State.Sha, git("rev-parse", "--short", "HEAD"));
+        } else
+            return GitHead(GitHead.State.Branch, branch_or_head);
     }
 }

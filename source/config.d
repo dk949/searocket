@@ -116,8 +116,11 @@ version (elm) enum {
 version (git) enum {
     GIT_CHAR = "  ",
     GIT_COLOR = Magenta,
+    GIT_DETACHED_COLOR = Yellow,
     GIT_STATUS_COLOR = Red,
     GIT_UNTRACKED_CHAR = "?",
+    GIT_COMMIT_CHAR = iconSelector(["c", "c", " 󰜘 "]),
+    GIT_TAG_CHAR = iconSelector(["t", "t", " 󰓹 "]),
     GIT_ADDED_CHAR = iconSelector(["+", "+", " "]),
     GIT_MODIFIED_CHAR = iconSelector(["!", "!", " "]),
     GIT_RENAMED_CHAR = iconSelector([">", "»", " "]),
