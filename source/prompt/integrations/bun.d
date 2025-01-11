@@ -15,17 +15,13 @@ version (bun) {
             store[Prop.InBunProject] = "";
             return;
         }
-        final switch (BUN_DETECT_VERSION) {
-            case true:
-                if (const ver = versionString!"bun") {
-                    store[Prop.InBunProject] = ver;
-                    return;
-                }
-                goto case;
-            case false:
-                store[Prop.InBunProject] = "bun";
-                break;
+        static if (BUN_DETECT_VERSION) {
+            if (const ver = versionString!"bun") {
+                store[Prop.InBunProject] = ver;
+                return;
+            }
         }
+        store[Prop.InBunProject] = "bun";
     }
 
     void buildBun(alias start)(ref Appender!string a) {

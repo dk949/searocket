@@ -13,17 +13,13 @@ version (zig) {
             store[Prop.InZigProject] = "";
             return;
         }
-        final switch (ZIG_DETECT_VERSION) {
-            case true:
-                if (const ver = versionString!("zig", "version")) {
-                    store[Prop.InZigProject] = ver.splitter('+').front;
-                    return;
-                }
-                goto case;
-            case false:
-                store[Prop.InZigProject] = "zig";
-                break;
+        static if (ZIG_DETECT_VERSION) {
+            if (const ver = versionString!("zig", "version")) {
+                store[Prop.InZigProject] = ver.splitter('+').front;
+                return;
+            }
         }
+        store[Prop.InZigProject] = "zig";
     }
 
     void buildZig(alias start)(ref Appender!string a) {
