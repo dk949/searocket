@@ -19,7 +19,6 @@ version (git) {
     import prompt.integrations.common: findFile;
     import storage: store, storeAs, Prop;
 
-    import std.bitmanip: bitfields;
     import std.algorithm: any;
     import std.process: execute;
     import std.string: stripRight;
@@ -28,7 +27,6 @@ version (git) {
     import std.conv: to, text;
     import std.array: Appender;
 
-    static assert(GitStatus.sizeof == 2);
     struct GitStatus {
         enum RemoteState {
             None,
@@ -37,24 +35,15 @@ version (git) {
             Diverged,
         }
 
-        mixin(
-            bitfields!(
-                bool, "added", 1,
-                bool, "modified", 1,
-                bool, "renamed", 1,
-                bool, "deleted", 1,
+        bool added;
+        bool modified;
+        bool renamed;
+        bool deleted;
+        bool untracked;
+        RemoteState remoteState;
+        bool unmerged;
+        bool stashed;
 
-                bool, "untracked", 1,
-
-                RemoteState, "remoteState", 2,
-
-                bool, "unmerged", 1,
-
-                bool, "stashed", 1,
-
-                int, "", 7
-        )
-        );
         string toString() const {
             return text("GitStatus(", '\n',
                 "\tadded = ", added, '\n',
