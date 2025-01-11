@@ -52,12 +52,6 @@ very perceptible.
     * Is there a background job running
   * `took`
     * How long did the previous command take
-  * `timing`
-    * Total execution time for the prompt.
-    * For debug only
-  * `nogc`
-    * Do not collect memory
-    * I was unable to measure any performance difference when using this option
 * `INTEGRATIONS`
   * `bun`
   * `d`
@@ -68,6 +62,13 @@ very perceptible.
   * `nodejs`
   * `python`
   * `zig`
+* `FEATURES`
+  * `timing`
+    * Total execution time for the prompt.
+    * For debug only
+  * `nogc`
+    * Do not collect memory
+    * I was unable to measure any performance difference when using this option
 * Currently unsupported:
   * `battery`
   * `docker`
@@ -92,11 +93,20 @@ See [configOpts.md](configOpts.md) for the full list.
 | `DESTDIR`           | ` `                         |
 | `PREFIX`            | `/usr`                      |
 | `ZSH_FILE_LOCATION` | `${PREFIX}/share/searocket` |
+| `MODE`              | (not set)                   |
+| `TESTING`           | (not set)                   |
 
 
 `searocket` will be installed to `${DESTDIR}${PREFIX}/bin/searocket`.
 
 `searocket.zsh` file will be installed to `${DESTDIR}${ZSH_FILE_LOCATION}/searocket.zsh`.
+
+If `MODE` is set to `DEBUG`, builds in debug mode. This enables all Features, utilities and
+integrations (even the unsupported ones). Produces better errors if the prompt crashes. Runs a bit
+slower.
+
+If `TESTING` is specified, running the `searocket` executable will run the tests, rather than
+produce a prompt.
 
 ## License
 
