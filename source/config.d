@@ -85,7 +85,7 @@ version (battery) enum {
     BATTERY_THRESHOLD = 20,
 }
 version (bun) enum {
-    BUN_SYMBOL = "🍞",
+    BUN_SYMBOL = iconSelector(["Bun", "🍞", " "]),
     BUN_COLOR = "#fbf0df".colorify,
     BUN_DETECT_VERSION = true,
 }
