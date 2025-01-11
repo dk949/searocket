@@ -1,7 +1,7 @@
 module prompt.integrations.nodejs;
 version (nodejs) {
 
-    import prompt.integrations.common: findFile;
+    import prompt.integrations.common: findFile, versionString;
     import storage: store, Prop;
     import common: append;
     import config: NODE_DETECT_VERSION, NODE_COLOR, NODE_SYMBOL, NodeDetectVersion;
@@ -15,28 +15,18 @@ version (nodejs) {
         string ver;
         if (auto nvmrc = findFile(".nvmrc")) {
             static if (NODE_DETECT_VERSION == NodeDetectVersion.Yes)
-                ver = detectVersion;
+                ver = versionString!("node", "-v");
             else
                 ver = readText(nvmrc).strip;
         } else if (findFile("package.json")) {
             static if (NODE_DETECT_VERSION == NodeDetectVersion.Yes
                 || NODE_DETECT_VERSION == NodeDetectVersion.IfNoNvmrc)
-                ver = detectVersion;
+                ver = versionString!("node", "-v");
             else
                 ver = "node";
         }
 
         store[Prop.InNodeProject] = ver;
-    }
-
-    string detectVersion() {
-
-        const res = execute(["node", "-v"]);
-        if (res.status == 0)
-            return res.output.strip;
-        else
-            return null;
-
     }
 
     void buildNodejs(alias start)(ref Appender!string a) {
