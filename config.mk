@@ -14,14 +14,15 @@ LDCFLAGS =
 
 OPTIONS = nogc
 
-UTILS = user     \
-        dir      \
+UTILS = dir      \
         exitcode \
+        jobs     \
         took     \
-        jobs
+        user
 
 INTEGRATIONS = bun    \
                d      \
+               elixir \
                elm    \
                git    \
                go     \

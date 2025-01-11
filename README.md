@@ -55,6 +55,7 @@ very perceptible.
 * `INTEGRATIONS`
   * `bun`
   * `d`
+  * `elixir`
   * `elm`
   * `git`
   * `go`
@@ -72,7 +73,6 @@ very perceptible.
 * Currently unsupported:
   * `battery`
   * `docker`
-  * `elixir`
   * `haskell`
   * `java`
   * `julia`

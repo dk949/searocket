@@ -95,7 +95,6 @@ template VersionError(string ver) {
 
 mixin VersionError!("battery");
 mixin VersionError!("docker");
-mixin VersionError!("elixir");
 mixin VersionError!("haskell");
 mixin VersionError!("java");
 mixin VersionError!("julia");

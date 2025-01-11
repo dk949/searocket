@@ -104,7 +104,7 @@ version (docker) enum {
 }
 // Not yet implemented
 version (elixir) enum {
-    ELIXIR_SYMBOL = iconSelector(["Elx", "💧", " "]),
+    ELIXIR_SYMBOL = iconSelector(["Elx", "💧", ""]),
     ELIXIR_COLOR = Magenta,
     ELIXIR_DETECT_VERSION = true,
 }
