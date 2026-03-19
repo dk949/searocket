@@ -90,7 +90,7 @@ version (d) {
 private
 template VersionError(string ver) {
     mixin(
-        `version (` ~ ver ~ `) debug {} else static assert(false, "` ~ ver ~ ` not yet implemented");`);
+        `version (` ~ ver ~ `) { debug {} else static assert(false, "` ~ ver ~ ` not yet implemented"); }`);
 }
 
 mixin VersionError!("battery");
