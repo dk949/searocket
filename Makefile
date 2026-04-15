@@ -14,7 +14,28 @@ REAL_DCFLAGS+=--unittest
 REAL_LDCFLAGS+=--unittest
 endif
 
-REAL_DCFLAGS    += -m64 -J$(GEN_CONF_DIR) -I$(SRC_DIR) $(VERSIONS:%=-d-version %)
+ifneq (,$(filter $(DC),ldc ldc2))
+
+ifdef STATIC
+REAL_DCFLAGS+=--link-defaultlib-shared=false --static
+REAL_LDCFLAGS+=$$(dirname $$(dirname $$(which $(DC))))/lib/lib{druntime,phobos2}-ldc.a --static
+endif
+
+VERFLAG=--d-version
+
+else ifeq ($(DC),dmd)
+
+ifdef STATIC
+$(warning Cannot link statically with dmd)
+endif
+
+VERFLAG=-version
+
+else
+$(error Unknown D compiler $(DC))
+endif
+
+REAL_DCFLAGS    += -m64 -J$(GEN_CONF_DIR) -I$(SRC_DIR) $(VERSIONS:%=$(VERFLAG)=%)
 REAL_LDCFLAGS   += -L-ldl -m64
 
 INTEG_FILES = $($(MODE)INTEGRATIONS:%=$(SRC_DIR)/prompt/integrations/%.d) $(SRC_DIR)/prompt/integrations/common.d
@@ -62,7 +83,7 @@ DEBUGINTEGRATIONS = battery \
 all: build/searocket build/searocket.zsh
 
 scripts/%: scripts/%.d
-	$(DC) $< -of $@
+	$(DC) $< -of=$@
 
 $(INTEG_PKG): scripts/makeintegrations $(INTEG_FILES)
 	$< $(SRC_DIR)/prompt/integrations/ $@
@@ -75,12 +96,12 @@ $(GEN_CONF_DIR)/use_icons: scripts/makeconfig
 
 build/%.o: $(SRC_DIR)/%.d
 	@mkdir -p $(dir $@)
-	$(DC) --makedeps=$(basename $@).dep $(REAL_DCFLAGS) $< -of $@ -c
+	$(DC) -makedeps=$(basename $@).dep $(REAL_DCFLAGS) $< -of=$@ -c
 
 $(OBJ): Makefile config.mk $(GEN) $(INTEG_PKG)
 
 build/searocket: $(OBJ)
-	$(DC) $(REAL_LDCFLAGS) $^ -of $@
+	$(DC) $(REAL_LDCFLAGS) $^ -of=$@
 	strip $@
 
 clean:
