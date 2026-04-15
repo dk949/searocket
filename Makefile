@@ -89,7 +89,7 @@ $(INTEG_PKG): scripts/makeintegrations $(INTEG_FILES)
 	$< $(SRC_DIR)/prompt/integrations/ $@
 
 build/searocket.zsh: scripts/makezshfile
-	$< $@
+	$< $@ $(VERSION)
 
 $(GEN_CONF_DIR)/use_icons: scripts/makeconfig
 	$< $(GEN_CONF_DIR)

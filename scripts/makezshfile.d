@@ -38,25 +38,31 @@ ___searocket_setup
 ";
 
 int main(string[] args) {
-    if (args.length != 2) {
-        stderr.writeln("Expected 1 argument got ", cast(int) args.length - 1);
+    if (args.length < 2 || args.length > 3) {
+        stderr.writeln("Expected 1 or 2 argument got ", cast(int) args.length - 1);
         return -1;
     }
     immutable filename = args[1];
     immutable cwd = __FILE_FULL_PATH__.dirName;
 
-    immutable desc = std.process.execute(["git", "-C", cwd, "describe"]);
+    string ver;
+    if(args.length == 2) {
+        immutable desc = std.process.execute(["git", "-C", cwd, "describe"]);
 
-    if (desc.status) {
-        stderr.writefln(
-            "`git describe` failed with exit code %d and message:\n%s",
-            desc.status, desc.output);
-        return desc.status;
+        if (desc.status) {
+            stderr.writefln(
+                "`git describe` failed with exit code %d and message:\n%s",
+                desc.status, desc.output);
+            return desc.status;
+        }
+        ver = desc.output.strip();
+    } else {
+        ver = args[2].strip();
     }
     try {
         filename.dirName.mkdirRecurse();
         auto fp = File(filename, "w");
-        fp.writef(template_, desc.output.strip());
+        fp.writef(template_, ver);
     } catch (Exception e) {
         stderr.writeln("could not open or write to file: ", e.message);
         return -2;
