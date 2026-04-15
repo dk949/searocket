@@ -90,16 +90,22 @@ See [configOpts.md](configOpts.md) for the full list.
 
 | Variable            | default                     |
 | ------------------- | --------------------------- |
+| `DC`                | `ldc`                       |
 | `DESTDIR`           | ` `                         |
 | `PREFIX`            | `/usr`                      |
 | `ZSH_FILE_LOCATION` | `${PREFIX}/share/searocket` |
+| `STATIC`            | (not set)                   |
 | `MODE`              | (not set)                   |
 | `TESTING`           | (not set)                   |
 
 
+Supported values of `DC`: `ldc`, `ldc2`, `dmd` (LDC *highly recommended*).
+
 `searocket` will be installed to `${DESTDIR}${PREFIX}/bin/searocket`.
 
 `searocket.zsh` file will be installed to `${DESTDIR}${ZSH_FILE_LOCATION}/searocket.zsh`.
+
+If `STATIC` is set to a non-empty value and `DC` is `ldc` or `ldc2`, links the binary statically.
 
 If `MODE` is set to `DEBUG`, builds in debug mode. This enables all Features, utilities and
 integrations (even the unsupported ones). Produces better errors if the prompt crashes. Runs a bit
