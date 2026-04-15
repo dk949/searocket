@@ -18,7 +18,7 @@ ifneq (,$(filter $(DC),ldc ldc2))
 
 ifdef STATIC
 REAL_DCFLAGS+=--link-defaultlib-shared=false --static
-REAL_LDCFLAGS+=$(LIBDIR)/lib{druntime,phobos2}-ldc.a --static
+REAL_LDCFLAGS+=$(LIBDIR)/libdruntime-ldc.a $(LIBDIR)/libphobos2-ldc.a --static
 endif
 
 VERFLAG=--d-version
