@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y make curl xz-utils
+
+      - name: Install LDC
+        run: |
+          LDC_VERSION=$(curl -s https://ldc-developers.github.io/LATEST)
+          curl -fsSL "https://github.com/ldc-developers/ldc/releases/download/v${LDC_VERSION}/ldc2-${LDC_VERSION}-linux-x86_64.tar.xz" \
+            -o ldc.tar.xz
+          tar -xf ldc.tar.xz
+          echo "$PWD/ldc2-${LDC_VERSION}-linux-x86_64/bin" >> $GITHUB_PATH
+
+      - name: Build
+        run: make STATIC=1 DC=ldc2 -j
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            build/searocket
+            build/searocket.zsh
