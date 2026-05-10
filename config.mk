@@ -26,6 +26,7 @@ UTILS = dir      \
 
 INTEGRATIONS = bun    \
                d      \
+               direnv \
                elixir \
                elm    \
                git    \

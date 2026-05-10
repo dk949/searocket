@@ -55,6 +55,7 @@ very perceptible.
 * `INTEGRATIONS`
   * `bun`
   * `d`
+  * `devenv`
   * `elixir`
   * `elm`
   * `git`

@@ -204,3 +204,8 @@ version (nix) enum {
     NIX_SYMBOL = iconSelector(["Nix", "❄️ ", " 󱄅 "]),
     NIX_COLOR = Cyan,
 }
+
+version (direnv) enum {
+    DIRENV_SYMBOL = iconSelector(["Dir", "📁 ", "  "]),
+    DIRENV_COLOR = Cyan,
+}

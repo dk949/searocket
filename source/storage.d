@@ -21,6 +21,7 @@ enum Prop {
 
     InBunProject,
     InDProject,
+    InDirenv,
     InDockerProject,
     InElixirProject,
     InElmProject,
@@ -112,6 +113,7 @@ class Storage {
                     file.writeln(0);
                     break;
                 case Prop.InRubyProject:
+                case Prop.InDirenv:
                 case Prop.InElixirProject:
                 case Prop.InHaskellProject:
                 case Prop.InJavaProject:
