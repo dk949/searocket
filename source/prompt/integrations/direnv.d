@@ -9,8 +9,9 @@ version (direnv) {
 
     void checkDirenv() {
         if (!environment.get("DIRENV_DIR"))
-            return;
-        store[Prop.InDirenv] = "dir";
+            store[Prop.InDirenv] = "";
+        else
+            store[Prop.InDirenv] = "dir";
     }
 
     void buildDirenv(alias start)(ref Appender!string a) {

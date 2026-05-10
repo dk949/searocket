@@ -9,8 +9,9 @@ version (nix) {
 
     void checkNix() {
         if (!environment.get("IN_NIX_SHELL"))
-            return;
-        store[Prop.InNixProject] = "nix";
+            store[Prop.InNixProject] = "";
+        else
+            store[Prop.InNixProject] = "nix";
     }
 
     void buildNix(alias start)(ref Appender!string a) {
