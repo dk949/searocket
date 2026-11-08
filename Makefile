@@ -112,8 +112,9 @@ clean:
 install: build/searocket build/searocket.zsh
 	@echo "installing executable in $(INSTALL_DIR)"
 	@echo "installing zsh script in $(ZSH_FILE_INSTALL_DIR)"
-	install -D build/searocket $(INSTALL_DIR)/searocket
-	install -D build/searocket.zsh $(ZSH_FILE_INSTALL_DIR)/searocket.zsh
+	install -d $(INSTALL_DIR) $(ZSH_FILE_INSTALL_DIR)
+	install -m 755 build/searocket $(INSTALL_DIR)/searocket
+	install -m 644 build/searocket.zsh $(ZSH_FILE_INSTALL_DIR)/searocket.zsh
 
 uninstall:
 	@echo "uninstalling executable from $(INSTALL_DIR)"

@@ -1,5 +1,5 @@
 DESTDIR           ?=
-PREFIX            ?= /usr
+PREFIX            ?= /usr/local
 ZSH_FILE_LOCATION ?= $(PREFIX)/share/searocket
 # This is retrieved from git describe automatically if unset
 VERSION           ?=
