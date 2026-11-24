@@ -95,6 +95,7 @@ See [configOpts.md](configOpts.md) for the full list.
 | `DESTDIR`           | ` `                         |
 | `PREFIX`            | `/usr`                      |
 | `ZSH_FILE_LOCATION` | `${PREFIX}/share/searocket` |
+| `ICONS`             | (not set)                   |
 | `STATIC`            | (not set)                   |
 | `MODE`              | (not set)                   |
 | `TESTING`           | (not set)                   |
@@ -105,6 +106,10 @@ Supported values of `DC`: `ldc`, `ldc2`, `dmd` (LDC *highly recommended*).
 `searocket` will be installed to `${DESTDIR}${PREFIX}/bin/searocket`.
 
 `searocket.zsh` file will be installed to `${DESTDIR}${ZSH_FILE_LOCATION}/searocket.zsh`.
+
+`ICONS` can be one of `no`, `emoji`, or `yes`, these correspond to pure ASCII, just using emoji, and
+using nerd font devicons. If `ICONS` is left blank (default), build script will search for a nerd
+font installation and select devicons if available and emoji otherwise.
 
 If `STATIC` is set to a non-empty value and `DC` is `ldc` or `ldc2`, links the binary statically.
 

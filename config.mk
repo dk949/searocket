@@ -35,3 +35,10 @@ INTEGRATIONS = bun    \
                nodejs \
                python \
                zig
+
+# Possible options are:
+# * (none): Let the build script figure it out
+# * No: ascii only
+# * Emoji: use emoji instead of devicons
+# * Yes: full nerd font devicons
+ICONS ?=

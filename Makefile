@@ -92,7 +92,7 @@ build/searocket.zsh: scripts/makezshfile
 	$< $@ $(VERSION)
 
 $(GEN_CONF_DIR)/use_icons: scripts/makeconfig
-	$< $(GEN_CONF_DIR)
+	$< $(GEN_CONF_DIR) $(ICONS)
 
 build/%.o: $(SRC_DIR)/%.d
 	@mkdir -p $(dir $@)
